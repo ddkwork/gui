@@ -3,10 +3,10 @@ module github.com/ddkwork/HyperDbg
 go 1.24.0
 
 require (
-	github.com/ddkwork/app v0.0.0-20250306084604-952de1834837
-	github.com/ddkwork/golibrary v0.0.91-0.20250306083701-983ead031b04
+	github.com/ddkwork/app v0.0.0-20250306173051-f1a1fac976d1
+	github.com/ddkwork/golibrary v0.0.91-0.20250306173050-a0dbb6222439
 	github.com/ddkwork/unison v0.0.0-20250306084349-57e3d988ab14
-	github.com/ebitengine/purego v0.9.0-alpha.2.0.20250211193246-e9fe9ab98c53
+	github.com/ebitengine/purego v0.9.0-alpha.2.0.20250319192307-d99d2bef7bd5
 	github.com/saferwall/pe v1.5.6
 	github.com/tc-hib/winres v0.3.1
 	github.com/winlabs/gowin32 v0.0.0-20240930213947-f504d7e14639
@@ -40,7 +40,7 @@ require (
 	github.com/valyala/fastjson v1.6.4 // indirect
 	github.com/yuin/goldmark v1.7.8 // indirect
 	golang.org/x/arch v0.12.0 // indirect
-	golang.org/x/exp v0.0.0-20250228200357-dead58393ab7 // indirect
+	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 // indirect
 	golang.org/x/mod v0.24.0 // indirect
 	golang.org/x/sync v0.12.0 // indirect
 	golang.org/x/term v0.30.0 // indirect
