@@ -1,9 +1,10 @@
 package ark
 
 import (
+	"testing"
+
 	"github.com/ddkwork/golibrary/safemap"
 	"github.com/ddkwork/golibrary/stream"
-	"testing"
 )
 
 func TestName(t *testing.T) {
