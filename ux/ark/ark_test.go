@@ -1,14 +1,14 @@
 package ark
 
 import (
-	"testing"
-
+	"github.com/ddkwork/golibrary/safemap"
 	"github.com/ddkwork/golibrary/stream"
+	"testing"
 )
 
 func TestName(t *testing.T) {
 	g := stream.NewGeneratedFile()
-	m := safemap.NewOrdered[string, string]()
+	m := new(safemap.M[string, string])
 	m.Set("kernelTables", "kernelTables")
 	m.Set("explorer", "explorer")
 	m.Set("taskManager", "taskManager")
