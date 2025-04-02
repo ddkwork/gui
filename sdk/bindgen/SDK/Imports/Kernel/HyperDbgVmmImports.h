@@ -155,6 +155,10 @@ VmFuncEnableMtfAndChangeExternalInterruptState(UINT32 CoreId);
 IMPORT_EXPORT_VMM VOID
 VmFuncEnableAndCheckForPreviousExternalInterrupts(UINT32 CoreId);
 
+IMPORT_EXPORT_VMM VOID
+VmFuncIdtQueryEntries(PINTERRUPT_DESCRIPTOR_TABLE_ENTRIES_PACKETS IdtQueryRequest,
+                      BOOLEAN                                     ReadFromVmxRoot);
+
 IMPORT_EXPORT_VMM UINT16
 VmFuncGetCsSelector();
 
@@ -217,6 +221,9 @@ VmFuncVmxCompatibleMemcmp(const CHAR * Address1, const CHAR * Address2, size_t C
 
 IMPORT_EXPORT_VMM BOOLEAN
 VmFuncApicStoreLocalApicFields(PLAPIC_PAGE LocalApicBuffer, PBOOLEAN IsUsingX2APIC);
+
+IMPORT_EXPORT_VMM BOOLEAN
+VmFuncApicStoreIoApicFields(IO_APIC_ENTRY_PACKETS * IoApicPackets);
 
 //////////////////////////////////////////////////
 //            Configuration Functions 	   		//
@@ -645,6 +652,15 @@ MemoryMapperCheckIfPdeIsLargePageOnTargetProcess(_In_ PVOID Va);
 IMPORT_EXPORT_VMM BOOLEAN
 MemoryManagerReadProcessMemoryNormal(HANDLE PID, PVOID Address, DEBUGGER_READ_MEMORY_TYPE MemType, PVOID UserBuffer, SIZE_T Size, PSIZE_T ReturnSize);
 
+IMPORT_EXPORT_VMM BOOLEAN
+MemoryManagerWritePhysicalMemoryNormal(PVOID TargetAddress, PVOID UserBuffer, SIZE_T Size);
+
+IMPORT_EXPORT_VMM BOOLEAN
+ReadPhysicalMemoryUsingMapIoSpace(PVOID PhysicalAddress, PVOID Buffer, SIZE_T BufferSize);
+
+IMPORT_EXPORT_VMM BOOLEAN
+WritePhysicalMemoryUsingMapIoSpace(PVOID PhysicalAddress, PVOID Buffer, SIZE_T BufferSize);
+
 //////////////////////////////////////////////////
 //                 Pool Manager     	   		//
 //////////////////////////////////////////////////
@@ -834,11 +850,11 @@ SetDebugRegisters(UINT32 DebugRegNum, DEBUG_REGISTER_TYPE ActionType, BOOLEAN Ap
 //              Transparent Mode        		//
 //////////////////////////////////////////////////
 
-IMPORT_EXPORT_VMM NTSTATUS
-TransparentHideDebugger(PDEBUGGER_HIDE_AND_TRANSPARENT_DEBUGGER_MODE Measurements);
+IMPORT_EXPORT_VMM BOOLEAN
+TransparentHideDebugger(PDEBUGGER_HIDE_AND_TRANSPARENT_DEBUGGER_MODE TransparentModeRequest);
 
-IMPORT_EXPORT_VMM NTSTATUS
-TransparentUnhideDebugger();
+IMPORT_EXPORT_VMM BOOLEAN
+TransparentUnhideDebugger(PDEBUGGER_HIDE_AND_TRANSPARENT_DEBUGGER_MODE TransparentModeRequest);
 
 //////////////////////////////////////////////////
 //     Non-internal Broadcasting Functions    	//
@@ -940,3 +956,6 @@ BroadcastDisableEferSyscallEventsOnAllProcessors();
 
 IMPORT_EXPORT_VMM QWORD
 PciReadCam(WORD Bus, WORD Device, WORD Function, BYTE Offset, UINT8 Width);
+
+IMPORT_EXPORT_VMM BOOLEAN
+PciWriteCam(WORD Bus, WORD Device, WORD Function, BYTE Offset, UINT8 Width, QWORD Value);

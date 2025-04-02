@@ -2,9 +2,8 @@
 package sdk
 
 import (
-	"unsafe"
-
 	"github.com/ddkwork/app/bindgen/bindlib"
+	"unsafe"
 )
 
 const GengoLibraryName = "sdk"
@@ -69,37 +68,41 @@ const (
 	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_ON_VMX_ROOT_WRITE_REGISTER                    DebuggerRemotePacketRequestedAction = 30
 	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_ON_VMX_ROOT_QUERY_PCITREE                     DebuggerRemotePacketRequestedAction = 31
 	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_ON_VMX_ROOT_PERFORM_ACTIONS_ON_APIC           DebuggerRemotePacketRequestedAction = 32
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_NO_ACTION                                     DebuggerRemotePacketRequestedAction = 33
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_STARTED                              DebuggerRemotePacketRequestedAction = 34
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_LOGGING_MECHANISM                    DebuggerRemotePacketRequestedAction = 35
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_PAUSED_AND_CURRENT_INSTRUCTION       DebuggerRemotePacketRequestedAction = 36
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_CHANGING_CORE              DebuggerRemotePacketRequestedAction = 37
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_CHANGING_PROCESS           DebuggerRemotePacketRequestedAction = 38
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_CHANGING_THREAD            DebuggerRemotePacketRequestedAction = 39
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_RUNNING_SCRIPT             DebuggerRemotePacketRequestedAction = 40
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_FORMATS                    DebuggerRemotePacketRequestedAction = 41
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_FLUSH                      DebuggerRemotePacketRequestedAction = 42
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_CALLSTACK                  DebuggerRemotePacketRequestedAction = 43
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_TEST_QUERY                    DebuggerRemotePacketRequestedAction = 44
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_REGISTERING_EVENT          DebuggerRemotePacketRequestedAction = 45
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_ADDING_ACTION_TO_EVENT     DebuggerRemotePacketRequestedAction = 46
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_QUERY_AND_MODIFY_EVENT     DebuggerRemotePacketRequestedAction = 47
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_SHORT_CIRCUITING_EVENT     DebuggerRemotePacketRequestedAction = 48
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_READING_REGISTERS          DebuggerRemotePacketRequestedAction = 49
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_READING_MEMORY             DebuggerRemotePacketRequestedAction = 50
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_EDITING_MEMORY             DebuggerRemotePacketRequestedAction = 51
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_BP                         DebuggerRemotePacketRequestedAction = 52
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_SHORT_CIRCUITING_STATE     DebuggerRemotePacketRequestedAction = 53
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_LIST_OR_MODIFY_BREAKPOINTS DebuggerRemotePacketRequestedAction = 54
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_UPDATE_SYMBOL_INFO                   DebuggerRemotePacketRequestedAction = 55
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RELOAD_SYMBOL_FINISHED               DebuggerRemotePacketRequestedAction = 56
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RELOAD_SEARCH_QUERY                  DebuggerRemotePacketRequestedAction = 57
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_PTE                        DebuggerRemotePacketRequestedAction = 58
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_VA2PA_AND_PA2VA            DebuggerRemotePacketRequestedAction = 59
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_BRINGING_PAGES_IN          DebuggerRemotePacketRequestedAction = 60
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_WRITE_REGISTER             DebuggerRemotePacketRequestedAction = 61
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_PCITREE                    DebuggerRemotePacketRequestedAction = 62
-	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_APIC_REQUESTS              DebuggerRemotePacketRequestedAction = 63
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_ON_VMX_ROOT_QUERY_PCIDEVINFO                  DebuggerRemotePacketRequestedAction = 33
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_ON_VMX_ROOT_READ_IDT_ENTRIES                  DebuggerRemotePacketRequestedAction = 34
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_NO_ACTION                                     DebuggerRemotePacketRequestedAction = 35
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_STARTED                              DebuggerRemotePacketRequestedAction = 36
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_LOGGING_MECHANISM                    DebuggerRemotePacketRequestedAction = 37
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_PAUSED_AND_CURRENT_INSTRUCTION       DebuggerRemotePacketRequestedAction = 38
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_CHANGING_CORE              DebuggerRemotePacketRequestedAction = 39
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_CHANGING_PROCESS           DebuggerRemotePacketRequestedAction = 40
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_CHANGING_THREAD            DebuggerRemotePacketRequestedAction = 41
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_RUNNING_SCRIPT             DebuggerRemotePacketRequestedAction = 42
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_FORMATS                    DebuggerRemotePacketRequestedAction = 43
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_FLUSH                      DebuggerRemotePacketRequestedAction = 44
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_CALLSTACK                  DebuggerRemotePacketRequestedAction = 45
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_TEST_QUERY                    DebuggerRemotePacketRequestedAction = 46
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_REGISTERING_EVENT          DebuggerRemotePacketRequestedAction = 47
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_ADDING_ACTION_TO_EVENT     DebuggerRemotePacketRequestedAction = 48
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_QUERY_AND_MODIFY_EVENT     DebuggerRemotePacketRequestedAction = 49
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_SHORT_CIRCUITING_EVENT     DebuggerRemotePacketRequestedAction = 50
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_READING_REGISTERS          DebuggerRemotePacketRequestedAction = 51
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_READING_MEMORY             DebuggerRemotePacketRequestedAction = 52
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_EDITING_MEMORY             DebuggerRemotePacketRequestedAction = 53
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_BP                         DebuggerRemotePacketRequestedAction = 54
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_SHORT_CIRCUITING_STATE     DebuggerRemotePacketRequestedAction = 55
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_LIST_OR_MODIFY_BREAKPOINTS DebuggerRemotePacketRequestedAction = 56
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_UPDATE_SYMBOL_INFO                   DebuggerRemotePacketRequestedAction = 57
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RELOAD_SYMBOL_FINISHED               DebuggerRemotePacketRequestedAction = 58
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RELOAD_SEARCH_QUERY                  DebuggerRemotePacketRequestedAction = 59
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_PTE                        DebuggerRemotePacketRequestedAction = 60
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_VA2PA_AND_PA2VA            DebuggerRemotePacketRequestedAction = 61
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_BRINGING_PAGES_IN          DebuggerRemotePacketRequestedAction = 62
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_WRITE_REGISTER             DebuggerRemotePacketRequestedAction = 63
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_PCITREE                    DebuggerRemotePacketRequestedAction = 64
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_APIC_REQUESTS              DebuggerRemotePacketRequestedAction = 65
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_PCIDEVINFO                 DebuggerRemotePacketRequestedAction = 66
+	DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_QUERY_IDT_ENTRIES_REQUESTS DebuggerRemotePacketRequestedAction = 67
 )
 
 // @brief enum for different packet types in HyperDbg packets
@@ -606,7 +609,10 @@ const (
 
 type DebuggerApicRequestType int32
 
-const DEBUGGER_APIC_REQUEST_TYPE_READ_LOCAL_APIC DebuggerApicRequestType = 0
+const (
+	DEBUGGER_APIC_REQUEST_TYPE_READ_LOCAL_APIC DebuggerApicRequestType = 0
+	DEBUGGER_APIC_REQUEST_TYPE_READ_IO_APIC    DebuggerApicRequestType = 1
+)
 
 // @brief breakpoint modification types
 type DebuggeeBreakpointModificationRequest int32
@@ -890,10 +896,10 @@ type EptSingleHookUnhookingDetails struct {
 	PhysicalAddress                           SizeT
 	OriginalEntry                             Uint64
 }
-type Anon1456_9 struct {
+type Anon1466_9 struct {
 	Raw [1]int32
 }
-type Anon1458_5 struct {
+type Anon1468_5 struct {
 	// [Bits 3:0] Segment type.
 	Type Uint32
 	// [Bit 4] S - Descriptor type (0 = system; 1 = code or data).
@@ -1033,6 +1039,9 @@ type PortablePciCommonHeader struct {
 	Bist                Uint8
 }
 type PortablePciDeviceHeader struct {
+	Raw [48]byte
+}
+type _PortablePciEpHeader struct {
 	Bar             [6]Uint32
 	CardBusCISPtr   Uint32
 	SubVendorId     Uint16
@@ -1046,25 +1055,58 @@ type PortablePciDeviceHeader struct {
 	MinGnt          Uint8
 	MaxLat          Uint8
 }
+type _PortablePciBridgeHeader struct {
+	Bar                       [2]Uint32
+	PrimaryBusNumber          Uint8
+	SecondaryBusNumber        Uint8
+	SubordinateBusNumber      Uint8
+	SecondaryLatencyTimer     Uint8
+	IoBase                    Uint8
+	IoLimit                   Uint8
+	SecondaryStatus           Uint16
+	MemoryBase                Uint16
+	MemoryLimit               Uint16
+	PrefetchableMemoryBase    Uint16
+	PrefetchableMemoryLimit   Uint16
+	PrefetchableBaseUpper32b  Uint32
+	PrefetchableLimitUpper32b Uint32
+	IoBaseUpper16b            Uint16
+	IoLimitUpper16b           Uint16
+	CapabilityPtr             Uint8
+	Reserved                  [3]Uint8
+	ROMBar                    Uint32
+	InterruptLine             Uint8
+	InterruptPin              Uint8
+	BridgeControl             Uint16
+}
+type PortablePciConfigSpaceHeaderMinimal struct {
+	VendorId  Uint16
+	DeviceId  Uint16
+	ClassCode [3]Uint8
+}
+type PciDevMinimal struct {
+	Bus         Uint8
+	Device      Uint8
+	Function    Uint8
+	ConfigSpace PortablePciConfigSpaceHeaderMinimal
+}
+type PciDevMmiobarInfo struct {
+	Is64Bit      Bool
+	IsEnabled    Bool
+	BarOffsetEnd Uint64
+	BarSize      Uint64
+}
 type PortablePciConfigSpaceHeader struct {
 	CommonHeader PortablePciCommonHeader
 	DeviceHeader PortablePciDeviceHeader
 }
-type PciFunction struct {
-	Placeholder Uint8
-}
-type PciDevice struct {
-	ConfigSpace [2]PortablePciConfigSpaceHeader
-	Function    [1]PciFunction
-}
-type PciBus struct {
-	Device [2]PciDevice
-}
-type PciDomain struct {
-	Bus [10]PciBus
-}
-type PciTree struct {
-	Domain [2]PciDomain
+type PciDev struct {
+	Bus                   Uint8
+	Device                Uint8
+	Function              Uint8
+	ConfigSpace           PortablePciConfigSpaceHeader
+	ConfigSpaceAdditional [191]Byte
+	MmioBarInfo           [6]PciDevMmiobarInfo
 }
 type DebuggerReadPageTableEntriesDetails struct {
 	VirtualAddress      Uint64
@@ -1180,17 +1222,8 @@ type DebuggerSearchMemory struct {
 	FinalStructureSize Uint32
 }
 type DebuggerHideAndTransparentDebuggerMode struct {
-	IsHide                               Boolean
-	CpuidAverage                         Uint64
-	CpuidStandardDeviation               Uint64
-	CpuidMedian                          Uint64
-	RdtscAverage                         Uint64
-	RdtscStandardDeviation               Uint64
-	RdtscMedian                          Uint64
-	TrueIfProcessIdAndFalseIfProcessName Boolean
-	ProcId                               Uint32
-	LengthOfProcessName                  Uint32
-	KernelStatus                         Uint64
+	IsHide       Boolean
+	KernelStatus Uint32
 }
 type DebuggerPrepareDebuggee struct {
 	PortAddress       Uint32
@@ -1389,6 +1422,18 @@ type LapicPage struct {
 	SelfIpi                 Uint32
 	Reserved3F4             [12]Uint8
 }
+type IoApicEntryPackets struct {
+	ApicBasePa Uint64
+	ApicBaseVa Uint64
+	IoIdReg    Uint32
+	IoLl       Uint32
+	IoArbIdReg Uint32
+	LlLhData   [400]Uint64
+}
+type InterruptDescriptorTableEntriesPackets struct {
+	KernelStatus Uint32
+	IdtEntry     [256]Uint64
+}
 type DebuggeeFormatsPacket struct {
 	Value  Uint64
 	Result Uint32
@@ -1431,8 +1476,14 @@ type DebuggeeRegisterWriteDescription struct {
 	KernelStatus Uint32
 }
 type DebuggeePcitreeRequestResponsePacket struct {
+	KernelStatus      Uint32
+	DeviceInfoListNum Uint8
+	DeviceInfoList    [255]PciDevMinimal
+}
+type DebuggeePcidevinfoRequestResponsePacket struct {
 	KernelStatus Uint32
-	PciTree      PciTree
+	PrintRaw     Bool
+	DeviceInfo   PciDev
 }
 type Symbol struct {
 	Type  uint64
@@ -1491,280 +1542,376 @@ type DebuggerUpdateSymbolTable struct {
 type DebuggeeSymbolUpdateResult struct {
 	KernelStatus Uint64
 }
-type (
-	_Int128T           = any
-	_Uint128T          = any
-	__NSConstantString = any
-	SizeT              = uint64
-	_BuiltinMsVaList   = *byte
-	_BuiltinVaList     = *byte
-	Uint8T             = uint8
-	Uint16T            = uint16
-	Uint32T            = uint32
-	Uint64T            = uint64
-	Int8T              = int8
-	Int16T             = int16
-	Int32T             = int32
-	Int64T             = int64
-	Bool               = int32
-	IntptrT            = *int32
-	Rune               = int32
-	WintT              = int32
-	Long               = int64
-	// type SizeT = uint64
-	PsizeT      = *uint64
-	TimeT       = uint64
-	Ntstatus    = uint64
-	PlistEntry  = *ListEntry
-	PrlistEntry = ListEntry
-	// ///////////////////////////////////////////////
-	Qword   = uint64
-	Uint64  = uint64
-	Puint64 = *uint64
-	Dword   = uint64
-	// type Bool = int32
-	Byte     = uint8
-	Word     = uint16
-	Int      = int32
-	Uint     = uint32
-	Puint    = *uint32
-	Ulong64  = uint64
-	Pulong64 = *uint64
-	Dword64  = uint64
-	Pdword64 = *uint64
-	Char     = byte
-	Wchar    = Rune
-	Uchar    = uint8
-	Ushort   = uint16
-	Ulong    = uint64
-	Boolean  = Uchar
-	Pboolean = *Boolean
-	Int8     = int8
-	Pint8    = *int8
-	Int16    = int16
-	Pint16   = *int16
-	Int32    = int32
-	Pint32   = *int32
-	Int64    = int64
-	Pint64   = *int64
-	Uint8    = uint8
-	Puint8   = *uint8
-	Uint16   = uint16
-	Puint16  = *uint16
-	Uint32   = uint32
-	Puint32  = *uint32
-	// type Uint64 = uint64
-	// type Puint64 = *uint64
-	PguestRegs = *GuestRegs
-	// @brief struct for extra registers
-	PguestExtraRegisters = *GuestExtraRegisters
-	// @brief List of different variables
-	PscriptEngineGeneralRegisters = *ScriptEngineGeneralRegisters
-	// @brief CR3 Structure
-	Pcr3Type = *Cr3Type
-	// @brief The structure of remote packets in HyperDbg
-	PdebuggerRemotePacket = *DebuggerRemotePacket
-	// @brief Callback type that can be used to be used
-	// as a custom ShowMessages function (by passing message as a parameter)
-	SendMessageWithParamCallback = unsafe.Pointer
-	// @brief Callback type that can be used to be used
-	// as a custom ShowMessages function (using shared buffer)
-	SendMessageWWithSharedBufferCallback = unsafe.Pointer
-	// @brief The structure of user-input packet in HyperDbg
-	PdebuggeeUserInputPacket = *DebuggeeUserInputPacket
-	// @brief The structure of user-input packet in HyperDbg
-	PdebuggeeEventAndActionHeaderForRemotePacket = *DebuggeeEventAndActionHeaderForRemotePacket
-	// @brief request to pause and halt the system
-	PdebuggerPausePacketReceived = *DebuggerPausePacketReceived
-	// @brief The structure of detail of a triggered event in HyperDbg
-	//
-	// @details This structure is also used for transferring breakpoint ids, RIP as the context, etc.
-	PdebuggerTriggeredEventDetails = *DebuggerTriggeredEventDetails
-	// @brief The structure of pausing packet in kHyperDbg
-	PdebuggeeKdPausedPacket = *DebuggeeKdPausedPacket
-	// @brief The structure of pausing packet in uHyperDbg
-	PdebuggeeUdPausedPacket = *DebuggeeUdPausedPacket
-	// @brief The structure of message packet in HyperDbg
-	PdebuggeeMessagePacket = *DebuggeeMessagePacket
-	// @brief Used to register event for transferring buffer between user-to-kernel
-	PregisterNotifyBuffer = *RegisterNotifyBuffer
-	// @brief Used for sending direct VMCALLs on the VMX root-mode
-	PdirectVmcallParameters = *DirectVmcallParameters
-	// @brief Temporary $context used in some EPT hook commands
-	PeptHooksContext = *EptHooksContext
-	// @brief Setting details for EPT Hooks (!monitor)
-	PeptHooksAddressDetailsForMemoryMonitor = *EptHooksAddressDetailsForMemoryMonitor
-	// @brief Setting details for EPT Hooks (!epthook2)
-	PeptHooksAddressDetailsForEpthook2 = *EptHooksAddressDetailsForEpthook2
-	// @brief Details of unhooking single EPT hooks
-	PeptSingleHookUnhookingDetails = *EptSingleHookUnhookingDetails
-	// @brief Describe segment selector in VMX
-	//
-	// @details This structure is copied from ia32.h to the SDK to
-	// be used as a data type for functions
-	VmxSegmentAccessRightsType = any
-	// @brief Segment selector
-	PvmxSegmentSelector = *VmxSegmentSelector
-	// @brief request for modifying events (enable/disable/clear)
-	PdebuggerModifyEvents = *DebuggerModifyEvents
-	// @brief request for performing a short-circuiting event
-	PdebuggerShortCircuitingEvent = *DebuggerShortCircuitingEvent
-	// @brief request for performing a short-circuiting event
-	PdebuggerEventOptions = *DebuggerEventOptions
-	// @brief Each command is like the following struct, it also used for
-	// tracing works in user mode and sending it to the kernl mode
-	//
-	// @details THIS IS NOT WHAT HYPERDBG SAVES FOR EVENTS IN KERNEL-MODE
-	PdebuggerGeneralEventDetail = *DebuggerGeneralEventDetail
-	// @brief Each event can have multiple actions
-	//
-	// @details THIS STRUCTURE IS ONLY USED IN USER MODE
-	// WE USE SEPARATE STRUCTURE FOR ACTIONS IN
-	// KERNEL MODE
-	PdebuggerGeneralAction = *DebuggerGeneralAction
-	// @brief Status of register buffers
-	PdebuggerEventAndActionResult = *DebuggerEventAndActionResult
-	// @brief The structure of port information (each item) in hwdbg
-	PhwdbgPortInformationItems = *HwdbgPortInformationItems
-	PhwdbgInstanceInformation  = *HwdbgInstanceInformation
-	// @brief The structure of script buffer in hwdbg
-	PhwdbgScriptBuffer = *HwdbgScriptBuffer
-	// @brief PCI Common Header
-	PportablePciCommonHeader = *PortablePciCommonHeader
-	// @brief PCI Device Header
-	PportablePciDeviceHeader = *PortablePciDeviceHeader
-	// @brief PCI Configuration Space Header
-	PportablePciConfigSpaceHeader = *PortablePciConfigSpaceHeader
-	// @brief PCI Function Data Structure
-	PpciFunction = *PciFunction
-	// @brief PCI Device Data Structure
-	PpciDevice = *PciDevice
-	// @brief PCI Bus Data Structure
-	PpciBus = *PciBus
-	// @brief PCI Domain Data Structure
-	PpciDomain = *PciDomain
-	// @brief PCI Tree Data Structure
-	PpciTree = *PciTree
-	// @brief request for !pte command
-	PdebuggerReadPageTableEntriesDetails = *DebuggerReadPageTableEntriesDetails
-	// @brief requests for !va2pa and !pa2va commands
-	PdebuggerVa2paAndPa2vaCommands = *DebuggerVa2paAndPa2vaCommands
-	// @brief requests for the '.pagein' command
-	PdebuggerPageInRequest = *DebuggerPageInRequest
-	// @brief requests for !rev command
-	PreversingMachineReconstructMemoryRequest = *ReversingMachineReconstructMemoryRequest
-	// @brief requests options for dt and struct command
-	PdebuggerDtCommandOptions = *DebuggerDtCommandOptions
-	// @brief requests for the 'prealloc' command
-	PdebuggerPreallocCommand = *DebuggerPreallocCommand
-	// @brief requests for the 'preactivate' command
-	PdebuggerPreactivateCommand = *DebuggerPreactivateCommand
-	// @brief request for reading virtual and physical memory
-	PdebuggerReadMemory = *DebuggerReadMemory
-	// @brief request for flushing buffers
-	PdebuggerFlushLoggingBuffers = *DebuggerFlushLoggingBuffers
-	// @brief request for test query buffers
-	PdebuggerDebuggerTestQueryBuffer = *DebuggerDebuggerTestQueryBuffer
-	// @brief request performing kernel tests
-	PdebuggerPerformKernelTests = *DebuggerPerformKernelTests
-	// @brief request for send a signal that command execution finished
-	PdebuggerSendCommandExecutionFinishedSignal = *DebuggerSendCommandExecutionFinishedSignal
-	// @brief request for send general packets from debuggee to debugger
-	PdebuggeeSendGeneralPacketFromDebuggeeToDebugger = *DebuggeeSendGeneralPacketFromDebuggeeToDebugger
-	// @brief request for send a user-mode message to debugger
-	PdebuggerSendUsermodeMessagesToDebugger = *DebuggerSendUsermodeMessagesToDebugger
-	// @brief request to read or write on MSRs
-	PdebuggerReadAndWriteOnMsr = *DebuggerReadAndWriteOnMsr
-	// @brief request for edit virtual and physical memory
-	PdebuggerEditMemory = *DebuggerEditMemory
-	// @brief request for searching memory
-	PdebuggerSearchMemory = *DebuggerSearchMemory
-	// @brief request for enable or disable transparent-mode
-	PdebuggerHideAndTransparentDebuggerMode = *DebuggerHideAndTransparentDebuggerMode
-	// @brief request to make this computer to a debuggee
-	PdebuggerPrepareDebuggee = *DebuggerPrepareDebuggee
-	// @brief The structure of changing core packet in HyperDbg
-	PdebuggeeChangeCorePacket = *DebuggeeChangeCorePacket
-	// @brief request for attaching user-mode process
-	PdebuggerAttachDetachUserModeProcess = *DebuggerAttachDetachUserModeProcess
-	// @brief The structure of needed information to get the details
-	// of the process from nt!_EPROCESS and location of needed variables
-	PdebuggeeProcessListNeededDetails = *DebuggeeProcessListNeededDetails
-	// @brief The structure of needed information to get the details
-	// of the thread from nt!_ETHREAD and location of needed variables
-	PdebuggeeThreadListNeededDetails = *DebuggeeThreadListNeededDetails
-	// @brief The structure showing list of processes (details of each
-	// entry)
-	PdebuggeeProcessListDetailsEntry = *DebuggeeProcessListDetailsEntry
-	// @brief The structure showing list of threads (details of each
-	// entry)
-	PdebuggeeThreadListDetailsEntry = *DebuggeeThreadListDetailsEntry
-	// @brief request for query count of active processes and threads
-	PdebuggerQueryActiveProcessesOrThreads = *DebuggerQueryActiveProcessesOrThreads
-	// @brief The structure for saving the callstack frame of one parameter
-	PdebuggerSingleCallstackFrame = *DebuggerSingleCallstackFrame
-	// @brief request for callstack frames
-	PdebuggerCallstackRequest                     = *DebuggerCallstackRequest
-	PusermodeDebuggingThreadOrProcessStateDetails = *UsermodeDebuggingThreadOrProcessStateDetails
-	// @brief Used for run the script
-	PdebuggerEventActionRunScriptConfiguration = *DebuggerEventActionRunScriptConfiguration
-	// @brief used in the case of requesting a "request buffer"
-	PdebuggerEventRequestBuffer = *DebuggerEventRequestBuffer
-	// @brief used in the case of custom code requests to the debugger
-	PdebuggerEventRequestCustomCode = *DebuggerEventRequestCustomCode
-	// @brief Description of user-mode debugging actions
-	PdebuggerUdCommandAction = *DebuggerUdCommandAction
-	// @brief The structure of command packet in uHyperDbg
-	PdebuggerUdCommandPacket = *DebuggerUdCommandPacket
-	// @brief The structure of changing process and show process
-	// packet in HyperDbg
-	PdebuggeeDetailsAndSwitchProcessPacket = *DebuggeeDetailsAndSwitchProcessPacket
-	// @brief The structure of changing thead and show thread
-	// packet in HyperDbg
-	PdebuggeeDetailsAndSwitchThreadPacket = *DebuggeeDetailsAndSwitchThreadPacket
-	// @brief The structure of stepping packet in HyperDbg
-	PdebuggeeStepPacket = *DebuggeeStepPacket
-	// @brief The structure of actions for APIC
-	PdebuggerApicRequest = *DebuggerApicRequest
-	// @brief LAPIC structure and offsets
-	PlapicPage = *LapicPage
-	// @brief The structure of .formats result packet in HyperDbg
-	PdebuggeeFormatsPacket = *DebuggeeFormatsPacket
-	// @brief The structure of .sym reload packet in HyperDbg
-	PdebuggeeSymbolRequestPacket = *DebuggeeSymbolRequestPacket
-	// @brief The structure of bp command packet in HyperDbg
-	PdebuggeeBpPacket = *DebuggeeBpPacket
-	// @brief The structure of breakpoint modification requests packet in HyperDbg
-	PdebuggeeBpListOrModifyPacket = *DebuggeeBpListOrModifyPacket
-	// @brief The structure of script packet in HyperDbg
-	PdebuggeeScriptPacket = *DebuggeeScriptPacket
-	// @brief The structure of result of search packet in HyperDbg
-	PdebuggeeResultOfSearchPacket = *DebuggeeResultOfSearchPacket
-	// @brief Register Descriptor Structure to use in r command.
-	PdebuggeeRegisterReadDescription = *DebuggeeRegisterReadDescription
-	// @brief Register Descriptor Structure to write on registers.
-	PdebuggeeRegisterWriteDescription = *DebuggeeRegisterWriteDescription
-	// @brief Pcitree Structure
-	PdebuggeePcitreeRequestResponsePacket = *DebuggeePcitreeRequestResponsePacket
-	Psymbol                               = *Symbol
-	PhwdbgShortSymbol                     = *HwdbgShortSymbol
-	PsymbolBuffer                         = *SymbolBuffer
-	PsymbolMap                            = *SymbolMap
-	PactionBuffer                         = *ActionBuffer
-	// @brief structures for sending and saving details
-	// about each module and symbols details
-	PmoduleSymbolDetail          = *ModuleSymbolDetail
-	PusermodeLoadedModuleSymbols = *UsermodeLoadedModuleSymbols
-	PusermodeLoadedModuleDetails = *UsermodeLoadedModuleDetails
-	// @brief Callback type that should be used to add
-	// list of Addresses to ObjectNames
-	SymbolMapCallback = unsafe.Pointer
-	// @brief request to add new symbol detail or update a previous
-	// symbol table entry
-	PdebuggerUpdateSymbolTable = *DebuggerUpdateSymbolTable
-	// @brief request that shows, symbol reload process is finished
-	PdebuggeeSymbolUpdateResult = *DebuggeeSymbolUpdateResult
-)
+type _Int128T = any
+type _Uint128T = any
+type __NSConstantString = any
+type SizeT = uint64
+type _BuiltinMsVaList = *byte
+type _BuiltinVaList = *byte
+type Uint8T = uint8
+type Uint16T = uint16
+type Uint32T = uint32
+type Uint64T = uint64
+type Int8T = int8
+type Int16T = int16
+type Int32T = int32
+type Int64T = int64
+type Bool = int32
+type IntptrT = *int32
+type Rune = int32
+type WintT = int32
+type Long = int64
+
+// type SizeT = uint64
+type PsizeT = *uint64
+type TimeT = uint64
+type Ntstatus = uint64
+type PlistEntry = *ListEntry
+type PrlistEntry = ListEntry
+
+// ///////////////////////////////////////////////
+type Qword = uint64
+type Uint64 = uint64
+type Puint64 = *uint64
+type Dword = uint64
+
+// type Bool = int32
+type Byte = uint8
+type Word = uint16
+type Int = int32
+type Uint = uint32
+type Puint = *uint32
+type Ulong64 = uint64
+type Pulong64 = *uint64
+type Dword64 = uint64
+type Pdword64 = *uint64
+type Char = byte
+type Wchar = Rune
+type Uchar = uint8
+type Ushort = uint16
+type Ulong = uint64
+type Boolean = Uchar
+type Pboolean = *Boolean
+type Int8 = int8
+type Pint8 = *int8
+type Int16 = int16
+type Pint16 = *int16
+type Int32 = int32
+type Pint32 = *int32
+type Int64 = int64
+type Pint64 = *int64
+type Uint8 = uint8
+type Puint8 = *uint8
+type Uint16 = uint16
+type Puint16 = *uint16
+type Uint32 = uint32
+type Puint32 = *uint32
+
+// type Uint64 = uint64
+// type Puint64 = *uint64
+type PguestRegs = *GuestRegs
+
+// @brief struct for extra registers
+type PguestExtraRegisters = *GuestExtraRegisters
+
+// @brief List of different variables
+type PscriptEngineGeneralRegisters = *ScriptEngineGeneralRegisters
+
+// @brief CR3 Structure
+type Pcr3Type = *Cr3Type
+
+// @brief The structure of remote packets in HyperDbg
+type PdebuggerRemotePacket = *DebuggerRemotePacket
+
+// @brief Callback type that can be used to be used
+// as a custom ShowMessages function (by passing message as a parameter)
+type SendMessageWithParamCallback = unsafe.Pointer
+
+// @brief Callback type that can be used to be used
+// as a custom ShowMessages function (using shared buffer)
+type SendMessageWWithSharedBufferCallback = unsafe.Pointer
+
+// @brief The structure of user-input packet in HyperDbg
+type PdebuggeeUserInputPacket = *DebuggeeUserInputPacket
+
+// @brief The structure of user-input packet in HyperDbg
+type PdebuggeeEventAndActionHeaderForRemotePacket = *DebuggeeEventAndActionHeaderForRemotePacket
+
+// @brief request to pause and halt the system
+type PdebuggerPausePacketReceived = *DebuggerPausePacketReceived
+
+// @brief The structure of detail of a triggered event in HyperDbg
+//
+// @details This structure is also used for transferring breakpoint ids, RIP as the context, etc.
+type PdebuggerTriggeredEventDetails = *DebuggerTriggeredEventDetails
+
+// @brief The structure of pausing packet in kHyperDbg
+type PdebuggeeKdPausedPacket = *DebuggeeKdPausedPacket
+
+// @brief The structure of pausing packet in uHyperDbg
+type PdebuggeeUdPausedPacket = *DebuggeeUdPausedPacket
+
+// @brief The structure of message packet in HyperDbg
+type PdebuggeeMessagePacket = *DebuggeeMessagePacket
+
+// @brief Used to register event for transferring buffer between user-to-kernel
+type PregisterNotifyBuffer = *RegisterNotifyBuffer
+
+// @brief Used for sending direct VMCALLs on the VMX root-mode
+type PdirectVmcallParameters = *DirectVmcallParameters
+
+// @brief Temporary $context used in some EPT hook commands
+type PeptHooksContext = *EptHooksContext
+
+// @brief Setting details for EPT Hooks (!monitor)
+type PeptHooksAddressDetailsForMemoryMonitor = *EptHooksAddressDetailsForMemoryMonitor
+
+// @brief Setting details for EPT Hooks (!epthook2)
+type PeptHooksAddressDetailsForEpthook2 = *EptHooksAddressDetailsForEpthook2
+
+// @brief Details of unhooking single EPT hooks
+type PeptSingleHookUnhookingDetails = *EptSingleHookUnhookingDetails
+
+// @brief Describe segment selector in VMX
+//
+// @details This structure is copied from ia32.h to the SDK to
+// be used as a data type for functions
+type VmxSegmentAccessRightsType = any
+
+// @brief Segment selector
+type PvmxSegmentSelector = *VmxSegmentSelector
+
+// @brief request for modifying events (enable/disable/clear)
+type PdebuggerModifyEvents = *DebuggerModifyEvents
+
+// @brief request for performing a short-circuiting event
+type PdebuggerShortCircuitingEvent = *DebuggerShortCircuitingEvent
+
+// @brief request for performing a short-circuiting event
+type PdebuggerEventOptions = *DebuggerEventOptions
+
+// @brief Each command is like the following struct, it also used for
+// tracing works in user mode and sending it to the kernl mode
+//
+// @details THIS IS NOT WHAT HYPERDBG SAVES FOR EVENTS IN KERNEL-MODE
+type PdebuggerGeneralEventDetail = *DebuggerGeneralEventDetail
+
+// @brief Each event can have multiple actions
+//
+// @details THIS STRUCTURE IS ONLY USED IN USER MODE
+// WE USE SEPARATE STRUCTURE FOR ACTIONS IN
+// KERNEL MODE
+type PdebuggerGeneralAction = *DebuggerGeneralAction
+
+// @brief Status of register buffers
+type PdebuggerEventAndActionResult = *DebuggerEventAndActionResult
+
+// @brief The structure of port information (each item) in hwdbg
+type PhwdbgPortInformationItems = *HwdbgPortInformationItems
+type PhwdbgInstanceInformation = *HwdbgInstanceInformation
+
+// @brief The structure of script buffer in hwdbg
+type PhwdbgScriptBuffer = *HwdbgScriptBuffer
+
+// @brief PCI Common Header
+type PportablePciCommonHeader = *PortablePciCommonHeader
+
+// @brief PCI Device Header
+type PportablePciDeviceHeader = *PortablePciDeviceHeader
+
+// @brief PCI Configuration Space Minimal Header for !pcitree
+type PportablePciConfigSpaceHeaderMinimal = *PortablePciConfigSpaceHeaderMinimal
+
+// @brief PCI Device Minimal Data Structure for !pcitree
+type PpciDevMinimal = *PciDevMinimal
+
+// @brief PCI Device MMIO BAR Metadata
+type PpciDevMmiobarInfo = *PciDevMmiobarInfo
+
+// @brief PCI Configuration Space Header
+type PportablePciConfigSpaceHeader = *PortablePciConfigSpaceHeader
+
+// @brief PCI Device Data Structure
+type PpciDev = *PciDev
+
+// @brief request for !pte command
+type PdebuggerReadPageTableEntriesDetails = *DebuggerReadPageTableEntriesDetails
+
+// @brief requests for !va2pa and !pa2va commands
+type PdebuggerVa2paAndPa2vaCommands = *DebuggerVa2paAndPa2vaCommands
+
+// @brief requests for the '.pagein' command
+type PdebuggerPageInRequest = *DebuggerPageInRequest
+
+// @brief requests for !rev command
+type PreversingMachineReconstructMemoryRequest = *ReversingMachineReconstructMemoryRequest
+
+// @brief requests options for dt and struct command
+type PdebuggerDtCommandOptions = *DebuggerDtCommandOptions
+
+// @brief requests for the 'prealloc' command
+type PdebuggerPreallocCommand = *DebuggerPreallocCommand
+
+// @brief requests for the 'preactivate' command
+type PdebuggerPreactivateCommand = *DebuggerPreactivateCommand
+
+// @brief request for reading virtual and physical memory
+type PdebuggerReadMemory = *DebuggerReadMemory
+
+// @brief request for flushing buffers
+type PdebuggerFlushLoggingBuffers = *DebuggerFlushLoggingBuffers
+
+// @brief request for test query buffers
+type PdebuggerDebuggerTestQueryBuffer = *DebuggerDebuggerTestQueryBuffer
+
+// @brief request performing kernel tests
+type PdebuggerPerformKernelTests = *DebuggerPerformKernelTests
+
+// @brief request for send a signal that command execution finished
+type PdebuggerSendCommandExecutionFinishedSignal = *DebuggerSendCommandExecutionFinishedSignal
+
+// @brief request for send general packets from debuggee to debugger
+type PdebuggeeSendGeneralPacketFromDebuggeeToDebugger = *DebuggeeSendGeneralPacketFromDebuggeeToDebugger
+
+// @brief request for send a user-mode message to debugger
+type PdebuggerSendUsermodeMessagesToDebugger = *DebuggerSendUsermodeMessagesToDebugger
+
+// @brief request to read or write on MSRs
+type PdebuggerReadAndWriteOnMsr = *DebuggerReadAndWriteOnMsr
+
+// @brief request for edit virtual and physical memory
+type PdebuggerEditMemory = *DebuggerEditMemory
+
+// @brief request for searching memory
+type PdebuggerSearchMemory = *DebuggerSearchMemory
+
+// @brief request for enable or disable transparent-mode
+type PdebuggerHideAndTransparentDebuggerMode = *DebuggerHideAndTransparentDebuggerMode
+
+// @brief request to make this computer to a debuggee
+type PdebuggerPrepareDebuggee = *DebuggerPrepareDebuggee
+
+// @brief The structure of changing core packet in HyperDbg
+type PdebuggeeChangeCorePacket = *DebuggeeChangeCorePacket
+
+// @brief request for attaching user-mode process
+type PdebuggerAttachDetachUserModeProcess = *DebuggerAttachDetachUserModeProcess
+
+// @brief The structure of needed information to get the details
+// of the process from nt!_EPROCESS and location of needed variables
+type PdebuggeeProcessListNeededDetails = *DebuggeeProcessListNeededDetails
+
+// @brief The structure of needed information to get the details
+// of the thread from nt!_ETHREAD and location of needed variables
+type PdebuggeeThreadListNeededDetails = *DebuggeeThreadListNeededDetails
+
+// @brief The structure showing list of processes (details of each
+// entry)
+type PdebuggeeProcessListDetailsEntry = *DebuggeeProcessListDetailsEntry
+
+// @brief The structure showing list of threads (details of each
+// entry)
+type PdebuggeeThreadListDetailsEntry = *DebuggeeThreadListDetailsEntry
+
+// @brief request for query count of active processes and threads
+type PdebuggerQueryActiveProcessesOrThreads = *DebuggerQueryActiveProcessesOrThreads
+
+// @brief The structure for saving the callstack frame of one parameter
+type PdebuggerSingleCallstackFrame = *DebuggerSingleCallstackFrame
+
+// @brief request for callstack frames
+type PdebuggerCallstackRequest = *DebuggerCallstackRequest
+type PusermodeDebuggingThreadOrProcessStateDetails = *UsermodeDebuggingThreadOrProcessStateDetails
+
+// @brief Used for run the script
+type PdebuggerEventActionRunScriptConfiguration = *DebuggerEventActionRunScriptConfiguration
+
+// @brief used in the case of requesting a "request buffer"
+type PdebuggerEventRequestBuffer = *DebuggerEventRequestBuffer
+
+// @brief used in the case of custom code requests to the debugger
+type PdebuggerEventRequestCustomCode = *DebuggerEventRequestCustomCode
+
+// @brief Description of user-mode debugging actions
+type PdebuggerUdCommandAction = *DebuggerUdCommandAction
+
+// @brief The structure of command packet in uHyperDbg
+type PdebuggerUdCommandPacket = *DebuggerUdCommandPacket
+
+// @brief The structure of changing process and show process
+// packet in HyperDbg
+type PdebuggeeDetailsAndSwitchProcessPacket = *DebuggeeDetailsAndSwitchProcessPacket
+
+// @brief The structure of changing thead and show thread
+// packet in HyperDbg
+type PdebuggeeDetailsAndSwitchThreadPacket = *DebuggeeDetailsAndSwitchThreadPacket
+
+// @brief The structure of stepping packet in HyperDbg
+type PdebuggeeStepPacket = *DebuggeeStepPacket
+
+// @brief The structure of actions for APIC
+type PdebuggerApicRequest = *DebuggerApicRequest
+
+// @brief LAPIC structure and offsets
+type PlapicPage = *LapicPage
+
+// @brief The structure of I/O APIC result packet in HyperDbg
+type PioApicEntryPackets = *IoApicEntryPackets
+
+// @brief The structure of IDT entries result packet in HyperDbg
+type PinterruptDescriptorTableEntriesPackets = *InterruptDescriptorTableEntriesPackets
+
+// @brief The structure of .formats result packet in HyperDbg
+type PdebuggeeFormatsPacket = *DebuggeeFormatsPacket
+
+// @brief The structure of .sym reload packet in HyperDbg
+type PdebuggeeSymbolRequestPacket = *DebuggeeSymbolRequestPacket
+
+// @brief The structure of bp command packet in HyperDbg
+type PdebuggeeBpPacket = *DebuggeeBpPacket
+
+// @brief The structure of breakpoint modification requests packet in HyperDbg
+type PdebuggeeBpListOrModifyPacket = *DebuggeeBpListOrModifyPacket
+
+// @brief The structure of script packet in HyperDbg
+type PdebuggeeScriptPacket = *DebuggeeScriptPacket
+
+// @brief The structure of result of search packet in HyperDbg
+type PdebuggeeResultOfSearchPacket = *DebuggeeResultOfSearchPacket
+
+// @brief Register Descriptor Structure to use in r command.
+type PdebuggeeRegisterReadDescription = *DebuggeeRegisterReadDescription
+
+// @brief Register Descriptor Structure to write on registers.
+type PdebuggeeRegisterWriteDescription = *DebuggeeRegisterWriteDescription
+
+// @brief Pcitree Request-Response Packet. Represents PCI device tree.
+type PdebuggeePcitreeRequestResponsePacket = *DebuggeePcitreeRequestResponsePacket
+
+// @brief PCI device info Request-Response Packet, used by !pcicam and future PCI-related commands. Represents a PCI device.
+type PdebuggeePcidevinfoRequestResponsePacket = *DebuggeePcidevinfoRequestResponsePacket
+type Psymbol = *Symbol
+type PhwdbgShortSymbol = *HwdbgShortSymbol
+type PsymbolBuffer = *SymbolBuffer
+type PsymbolMap = *SymbolMap
+type PactionBuffer = *ActionBuffer
+
+// @brief structures for sending and saving details
+// about each module and symbols details
+type PmoduleSymbolDetail = *ModuleSymbolDetail
+type PusermodeLoadedModuleSymbols = *UsermodeLoadedModuleSymbols
+type PusermodeLoadedModuleDetails = *UsermodeLoadedModuleDetails
+
+// @brief Callback type that should be used to add
+// list of Addresses to ObjectNames
+type SymbolMapCallback = unsafe.Pointer
+
+// @brief request to add new symbol detail or update a previous
+// symbol table entry
+type PdebuggerUpdateSymbolTable = *DebuggerUpdateSymbolTable
+
+// @brief request that shows, symbol reload process is finished
+type PdebuggeeSymbolUpdateResult = *DebuggeeSymbolUpdateResult
 
 var __imp_hyperdbg_u_detect_vmx_support bindlib.PreloadProc
 
@@ -1815,7 +1962,11 @@ func init() {
 	__imp_hyperdbg_u_stepping_step_over_for_gu = GengoLibrary.ImportNow("hyperdbg_u_stepping_step_over_for_gu")
 	__imp_hyperdbg_u_start_process = GengoLibrary.ImportNow("hyperdbg_u_start_process")
 	__imp_hyperdbg_u_start_process_with_args = GengoLibrary.ImportNow("hyperdbg_u_start_process_with_args")
-	__imp_hyperdbg_u_command_get_local_apic = GengoLibrary.ImportNow("hyperdbg_u_command_get_local_apic")
+	__imp_hyperdbg_u_get_local_apic = GengoLibrary.ImportNow("hyperdbg_u_get_local_apic")
+	__imp_hyperdbg_u_get_io_apic = GengoLibrary.ImportNow("hyperdbg_u_get_io_apic")
+	__imp_hyperdbg_u_get_idt_entry = GengoLibrary.ImportNow("hyperdbg_u_get_idt_entry")
+	__imp_hyperdbg_u_enable_transparent_mode = GengoLibrary.ImportNow("hyperdbg_u_enable_transparent_mode")
+	__imp_hyperdbg_u_disable_transparent_mode = GengoLibrary.ImportNow("hyperdbg_u_disable_transparent_mode")
 	__imp_hyperdbg_u_assemble_get_length = GengoLibrary.ImportNow("hyperdbg_u_assemble_get_length")
 	__imp_hyperdbg_u_assemble = GengoLibrary.ImportNow("hyperdbg_u_assemble")
 	__imp_hwdbg_script_run_script = GengoLibrary.ImportNow("hwdbg_script_run_script")
@@ -1881,8 +2032,8 @@ func init() {
 	bindlib.Validate((*EptHooksAddressDetailsForMemoryMonitor)(nil), 32, 8, "StartAddress", 0, "EndAddress", 8, "SetHookForRead", 16, "SetHookForWrite", 17, "SetHookForExec", 18, "MemoryType", 20, "Tag", 24)
 	bindlib.Validate((*EptHooksAddressDetailsForEpthook2)(nil), 16, 8, "TargetAddress", 0, "HookFunction", 8)
 	bindlib.Validate((*EptSingleHookUnhookingDetails)(nil), 24, 8, "CallerNeedsToRestoreEntryAndInvalidateEpt", 0, "RemoveBreakpointInterception", 1, "PhysicalAddress", 8, "OriginalEntry", 16)
-	bindlib.Validate((*Anon1456_9)(nil), 4, 4)
-	bindlib.Validate((*Anon1458_5)(nil), 4, 4, "Type", 0, "DescriptorType", 0, "DescriptorPrivilegeLevel", 0, "Present", 0, "Reserved1", 1, "AvailableBit", 1, "LongMode", 1, "DefaultBig", 1, "Granularity", 1, "Unusable", 2, "Reserved2", 2)
+	bindlib.Validate((*Anon1466_9)(nil), 4, 4)
+	bindlib.Validate((*Anon1468_5)(nil), 4, 4, "Type", 0, "DescriptorType", 0, "DescriptorPrivilegeLevel", 0, "Present", 0, "Reserved1", 1, "AvailableBit", 1, "LongMode", 1, "DefaultBig", 1, "Granularity", 1, "Unusable", 2, "Reserved2", 2)
 	bindlib.Validate((*VmxSegmentSelector)(nil), 24, 8, "Selector", 0, "Attributes", 4, "Limit", 8, "Base", 16)
 	bindlib.Validate((*DebuggerModifyEvents)(nil), 24, 8, "Tag", 0, "KernelStatus", 8, "TypeOfAction", 16, "IsEnabled", 20)
 	bindlib.Validate((*DebuggerShortCircuitingEvent)(nil), 16, 8, "KernelStatus", 0, "IsShortCircuiting", 8)
@@ -1894,14 +2045,15 @@ func init() {
 	bindlib.Validate((*HwdbgInstanceInformation)(nil), 64, 4, "Version", 0, "maximumNumberOfStages", 4, "scriptVariableLength", 8, "numberOfSupportedLocalAndGlobalVariables", 12, "numberOfSupportedTemporaryVariables", 16, "maximumNumberOfSupportedGetScriptOperators", 20, "maximumNumberOfSupportedSetScriptOperators", 24, "sharedMemorySize", 28, "debuggerAreaOffset", 32, "debuggeeAreaOffset", 36, "numberOfPins", 40, "numberOfPorts", 44, "scriptCapabilities", 48, "bramAddrWidth", 56, "bramDataWidth", 60)
 	bindlib.Validate((*_HwdbgScriptCapabilities)(nil), 8, 4, "AssignLocalGlobalVar", 0, "AssignRegisters", 0, "AssignPseudoRegisters", 0, "ConditionalStatementsAndComparisonOperators", 0, "StackAssignments", 0, "FuncOr", 0, "FuncXor", 0, "FuncAnd", 0, "FuncAsr", 1, "FuncAsl", 1, "FuncAdd", 1, "FuncSub", 1, "FuncMul", 1, "FuncDiv", 1, "FuncMod", 1, "FuncGt", 1, "FuncLt", 2, "FuncEgt", 2, "FuncElt", 2, "FuncEqual", 2, "FuncNeq", 2, "FuncJmp", 2, "FuncJz", 2, "FuncJnz", 2, "FuncMov", 3, "FuncPrintf", 3)
 	bindlib.Validate((*HwdbgScriptBuffer)(nil), 4, 4, "scriptNumberOfSymbols", 0)
-	bindlib.Validate((*PortablePciCommonHeader)(nil), 16, 2, "VendorId", 0, "DeviceId", 2, "Command", 4, "Status", 6, "RevisionId", 8, "ClassCode", 9, "CacheLineSize", 12, "PrimaryLatencyTimer", 13, "HeaderType", 14, "Bist", 15)
-	bindlib.Validate((*PortablePciDeviceHeader)(nil), 48, 4, "Bar", 0, "CardBusCISPtr", 24, "SubVendorId", 28, "SubSystemId", 30, "ROMBar", 32, "CapabilitiesPtr", 36, "Reserved", 37, "Reserved1", 40, "InterruptLine", 44, "InterruptPin", 45, "MinGnt", 46, "MaxLat", 47)
-	bindlib.Validate((*PortablePciConfigSpaceHeader)(nil), 64, 4, "CommonHeader", 0, "DeviceHeader", 16)
-	bindlib.Validate((*PciFunction)(nil), 1, 1, "Placeholder", 0)
-	bindlib.Validate((*PciDevice)(nil), 132, 4, "ConfigSpace", 0, "Function", 128)
-	bindlib.Validate((*PciBus)(nil), 264, 4, "Device", 0)
-	bindlib.Validate((*PciDomain)(nil), 2640, 4, "Bus", 0)
-	bindlib.Validate((*PciTree)(nil), 5280, 4, "Domain", 0)
+	bindlib.Validate((*PortablePciCommonHeader)(nil), 16, 1, "VendorId", 0, "DeviceId", 2, "Command", 4, "Status", 6, "RevisionId", 8, "ClassCode", 9, "CacheLineSize", 12, "PrimaryLatencyTimer", 13, "HeaderType", 14, "Bist", 15)
+	bindlib.Validate((*PortablePciDeviceHeader)(nil), 48, 1)
+	bindlib.Validate((*_PortablePciEpHeader)(nil), 48, 1, "Bar", 0, "CardBusCISPtr", 24, "SubVendorId", 28, "SubSystemId", 30, "ROMBar", 32, "CapabilitiesPtr", 36, "Reserved", 37, "Reserved1", 40, "InterruptLine", 44, "InterruptPin", 45, "MinGnt", 46, "MaxLat", 47)
+	bindlib.Validate((*_PortablePciBridgeHeader)(nil), 48, 1, "Bar", 0, "PrimaryBusNumber", 8, "SecondaryBusNumber", 9, "SubordinateBusNumber", 10, "SecondaryLatencyTimer", 11, "IoBase", 12, "IoLimit", 13, "SecondaryStatus", 14, "MemoryBase", 16, "MemoryLimit", 18, "PrefetchableMemoryBase", 20, "PrefetchableMemoryLimit", 22, "PrefetchableBaseUpper32b", 24, "PrefetchableLimitUpper32b", 28, "IoBaseUpper16b", 32, "IoLimitUpper16b", 34, "CapabilityPtr", 36, "Reserved", 37, "ROMBar", 40, "InterruptLine", 44, "InterruptPin", 45, "BridgeControl", 46)
+	bindlib.Validate((*PortablePciConfigSpaceHeaderMinimal)(nil), 7, 1, "VendorId", 0, "DeviceId", 2, "ClassCode", 4)
+	bindlib.Validate((*PciDevMinimal)(nil), 9, 1, "Bus", 0, "Device", 1, "Function", 1, "ConfigSpace", 2)
+	bindlib.Validate((*PciDevMmiobarInfo)(nil), 24, 1, "Is64Bit", 0, "IsEnabled", 4, "BarOffsetEnd", 8, "BarSize", 16)
+	bindlib.Validate((*PortablePciConfigSpaceHeader)(nil), 64, 1, "CommonHeader", 0, "DeviceHeader", 16)
+	bindlib.Validate((*PciDev)(nil), 401, 1, "Bus", 0, "Device", 1, "Function", 1, "ConfigSpace", 2, "ConfigSpaceAdditional", 66, "MmioBarInfo", 257)
 	bindlib.Validate((*DebuggerReadPageTableEntriesDetails)(nil), 88, 8, "VirtualAddress", 0, "ProcessId", 8, "Pml4eVirtualAddress", 16, "Pml4eValue", 24, "PdpteVirtualAddress", 32, "PdpteValue", 40, "PdeVirtualAddress", 48, "PdeValue", 56, "PteVirtualAddress", 64, "PteValue", 72, "KernelStatus", 80)
 	bindlib.Validate((*DebuggerVa2paAndPa2vaCommands)(nil), 32, 8, "VirtualAddress", 0, "PhysicalAddress", 8, "ProcessId", 16, "IsVirtual2Physical", 20, "KernelStatus", 24)
 	bindlib.Validate((*DebuggerPageInRequest)(nil), 32, 8, "VirtualAddressFrom", 0, "VirtualAddressTo", 8, "ProcessId", 16, "PageFaultErrorCode", 20, "KernelStatus", 24)
@@ -1919,7 +2071,7 @@ func init() {
 	bindlib.Validate((*DebuggerReadAndWriteOnMsr)(nil), 24, 8, "Msr", 0, "CoreNumber", 8, "ActionType", 12, "Value", 16)
 	bindlib.Validate((*DebuggerEditMemory)(nil), 40, 8, "Result", 0, "Address", 8, "ProcessId", 16, "MemoryType", 20, "ByteSize", 24, "CountOf64Chunks", 28, "FinalStructureSize", 32)
 	bindlib.Validate((*DebuggerSearchMemory)(nil), 40, 8, "Address", 0, "Length", 8, "ProcessId", 16, "MemoryType", 20, "ByteSize", 24, "CountOf64Chunks", 28, "FinalStructureSize", 32)
-	bindlib.Validate((*DebuggerHideAndTransparentDebuggerMode)(nil), 80, 8, "IsHide", 0, "CpuidAverage", 8, "CpuidStandardDeviation", 16, "CpuidMedian", 24, "RdtscAverage", 32, "RdtscStandardDeviation", 40, "RdtscMedian", 48, "TrueIfProcessIdAndFalseIfProcessName", 56, "ProcId", 60, "LengthOfProcessName", 64, "KernelStatus", 72)
+	bindlib.Validate((*DebuggerHideAndTransparentDebuggerMode)(nil), 8, 4, "IsHide", 0, "KernelStatus", 4)
 	bindlib.Validate((*DebuggerPrepareDebuggee)(nil), 280, 8, "PortAddress", 0, "Baudrate", 4, "KernelBaseAddress", 8, "Result", 16, "OsName", 20)
 	bindlib.Validate((*DebuggeeChangeCorePacket)(nil), 8, 4, "NewCore", 0, "Result", 4)
 	bindlib.Validate((*DebuggerAttachDetachUserModeProcess)(nil), 40, 8, "IsStartingNewProcess", 0, "ProcessId", 4, "ThreadId", 8, "CheckCallbackAtFirstInstruction", 12, "Is32Bit", 13, "IsPaused", 14, "Action", 16, "CountOfActiveDebuggingThreadsAndProcesses", 20, "Token", 24, "Result", 32)
@@ -1941,6 +2093,8 @@ func init() {
 	bindlib.Validate((*DebuggeeStepPacket)(nil), 12, 4, "StepType", 0, "IsCurrentInstructionACall", 4, "CallLength", 8)
 	bindlib.Validate((*DebuggerApicRequest)(nil), 12, 4, "ApicType", 0, "IsUsingX2APIC", 4, "KernelStatus", 8)
 	bindlib.Validate((*LapicPage)(nil), 1024, 4, "Reserved000", 0, "Reserved010", 16, "Id", 32, "Reserved024", 36, "Version", 48, "Reserved034", 52, "Reserved040", 64, "Tpr", 128, "Reserved084", 132, "ArbitrationPriority", 144, "Reserved094", 148, "ProcessorPriority", 160, "Reserved0A4", 164, "Eoi", 176, "Reserved0B4", 180, "RemoteRead", 192, "Reserved0C4", 196, "LogicalDestination", 208, "Reserved0D4", 212, "DestinationFormat", 224, "Reserved0E4", 228, "SpuriousInterruptVector", 240, "Reserved0F4", 244, "Isr", 256, "Tmr", 384, "Irr", 512, "ErrorStatus", 640, "Reserved284", 644, "Reserved290", 656, "LvtCmci", 752, "Reserved2F4", 756, "IcrLow", 768, "Reserved304", 772, "IcrHigh", 784, "Reserved314", 788, "LvtTimer", 800, "Reserved324", 804, "LvtThermalSensor", 816, "Reserved334", 820, "LvtPerfMonCounters", 832, "Reserved344", 836, "LvtLINT0", 848, "Reserved354", 852, "LvtLINT1", 864, "Reserved364", 868, "LvtError", 880, "Reserved374", 884, "InitialCount", 896, "Reserved384", 900, "CurrentCount", 912, "Reserved394", 916, "Reserved3A0", 928, "DivideConfiguration", 992, "Reserved3E4", 996, "SelfIpi", 1008, "Reserved3F4", 1012)
+	bindlib.Validate((*IoApicEntryPackets)(nil), 3232, 8, "ApicBasePa", 0, "ApicBaseVa", 8, "IoIdReg", 16, "IoLl", 20, "IoArbIdReg", 24, "LlLhData", 32)
+	bindlib.Validate((*InterruptDescriptorTableEntriesPackets)(nil), 2056, 8, "KernelStatus", 0, "IdtEntry", 8)
 	bindlib.Validate((*DebuggeeFormatsPacket)(nil), 16, 8, "Value", 0, "Result", 8)
 	bindlib.Validate((*DebuggeeSymbolRequestPacket)(nil), 4, 4, "ProcessId", 0)
 	bindlib.Validate((*DebuggeeBpPacket)(nil), 32, 8, "Address", 0, "Pid", 8, "Tid", 12, "Core", 16, "RemoveAfterHit", 20, "CheckForCallbacks", 21, "Result", 24)
@@ -1949,7 +2103,8 @@ func init() {
 	bindlib.Validate((*DebuggeeResultOfSearchPacket)(nil), 8, 4, "CountOfResults", 0, "Result", 4)
 	bindlib.Validate((*DebuggeeRegisterReadDescription)(nil), 24, 8, "RegisterId", 0, "Value", 8, "KernelStatus", 16)
 	bindlib.Validate((*DebuggeeRegisterWriteDescription)(nil), 24, 8, "RegisterId", 0, "Value", 8, "KernelStatus", 16)
-	bindlib.Validate((*DebuggeePcitreeRequestResponsePacket)(nil), 5284, 4, "KernelStatus", 0, "PciTree", 4)
+	bindlib.Validate((*DebuggeePcitreeRequestResponsePacket)(nil), 2300, 4, "KernelStatus", 0, "DeviceInfoListNum", 4, "DeviceInfoList", 5)
+	bindlib.Validate((*DebuggeePcidevinfoRequestResponsePacket)(nil), 412, 4, "KernelStatus", 0, "PrintRaw", 4, "DeviceInfo", 8)
 	bindlib.Validate((*Symbol)(nil), 24, 8, "Type", 0, "Len", 8, "Value", 16)
 	bindlib.Validate((*HwdbgShortSymbol)(nil), 16, 8, "Type", 0, "Value", 8)
 	bindlib.Validate((*SymbolBuffer)(nil), 24, 8, "Head", 0, "Pointer", 8, "Size", 12, "Message", 16)
@@ -1961,7 +2116,6 @@ func init() {
 	bindlib.Validate((*DebuggerUpdateSymbolTable)(nil), 608, 8, "TotalSymbols", 0, "CurrentSymbolIndex", 4, "SymbolDetailPacket", 8)
 	bindlib.Validate((*DebuggeeSymbolUpdateResult)(nil), 8, 8, "KernelStatus", 0)
 }
-
 func DetectVmxSupport() Boolean {
 	__res := bindlib.CCall0(__imp_hyperdbg_u_detect_vmx_support.Addr())
 	return bindlib.UnmarshallSyscall[Boolean](__res)
@@ -2252,10 +2406,38 @@ func StartProcessWithArgs(path *Wchar, arguments *Wchar) Boolean {
 	return bindlib.UnmarshallSyscall[Boolean](__res)
 }
 
-var __imp_hyperdbg_u_command_get_local_apic bindlib.PreloadProc
+var __imp_hyperdbg_u_get_local_apic bindlib.PreloadProc
 
-func CommandGetLocalApic(local_apic PlapicPage, is_using_x2apic *Boolean) Boolean {
-	__res := bindlib.CCall2(__imp_hyperdbg_u_command_get_local_apic.Addr(), bindlib.MarshallSyscall(local_apic), bindlib.MarshallSyscall(is_using_x2apic))
+func GetLocalApic(local_apic PlapicPage, is_using_x2apic *Boolean) Boolean {
+	__res := bindlib.CCall2(__imp_hyperdbg_u_get_local_apic.Addr(), bindlib.MarshallSyscall(local_apic), bindlib.MarshallSyscall(is_using_x2apic))
+	return bindlib.UnmarshallSyscall[Boolean](__res)
+}
+
+var __imp_hyperdbg_u_get_io_apic bindlib.PreloadProc
+
+func GetIoApic(io_apic *IoApicEntryPackets) Boolean {
+	__res := bindlib.CCall1(__imp_hyperdbg_u_get_io_apic.Addr(), bindlib.MarshallSyscall(io_apic))
+	return bindlib.UnmarshallSyscall[Boolean](__res)
+}
+
+var __imp_hyperdbg_u_get_idt_entry bindlib.PreloadProc
+
+func GetIdtEntry(idt_packet *InterruptDescriptorTableEntriesPackets) Boolean {
+	__res := bindlib.CCall1(__imp_hyperdbg_u_get_idt_entry.Addr(), bindlib.MarshallSyscall(idt_packet))
+	return bindlib.UnmarshallSyscall[Boolean](__res)
+}
+
+var __imp_hyperdbg_u_enable_transparent_mode bindlib.PreloadProc
+
+func EnableTransparentMode() Boolean {
+	__res := bindlib.CCall0(__imp_hyperdbg_u_enable_transparent_mode.Addr())
+	return bindlib.UnmarshallSyscall[Boolean](__res)
+}
+
+var __imp_hyperdbg_u_disable_transparent_mode bindlib.PreloadProc
+
+func DisableTransparentMode() Boolean {
+	__res := bindlib.CCall0(__imp_hyperdbg_u_disable_transparent_mode.Addr())
 	return bindlib.UnmarshallSyscall[Boolean](__res)
 }
 
@@ -2409,8 +2591,8 @@ func ScriptEngineCreateSymbolTableForDisassembler(CallbackFunction unsafe.Pointe
 
 var __imp_ScriptEngineConvertFileToPdbPath bindlib.PreloadProc
 
-func ScriptEngineConvertFileToPdbPath(LocalFilePath *byte, ResultPath *byte) Boolean {
-	__res := bindlib.CCall2(__imp_ScriptEngineConvertFileToPdbPath.Addr(), bindlib.MarshallSyscall(LocalFilePath), bindlib.MarshallSyscall(ResultPath))
+func ScriptEngineConvertFileToPdbPath(LocalFilePath *byte, ResultPath *byte, ResultPathSize int32) Boolean {
+	__res := bindlib.CCall3(__imp_ScriptEngineConvertFileToPdbPath.Addr(), bindlib.MarshallSyscall(LocalFilePath), bindlib.MarshallSyscall(ResultPath), bindlib.MarshallSyscall(ResultPathSize))
 	return bindlib.UnmarshallSyscall[Boolean](__res)
 }
 
@@ -2513,8 +2695,8 @@ func SymCreateSymbolTableForDisassembler(CallbackFunction unsafe.Pointer) Boolea
 
 var __imp_SymConvertFileToPdbPath bindlib.PreloadProc
 
-func SymConvertFileToPdbPath(LocalFilePath *byte, ResultPath *byte) Boolean {
-	__res := bindlib.CCall2(__imp_SymConvertFileToPdbPath.Addr(), bindlib.MarshallSyscall(LocalFilePath), bindlib.MarshallSyscall(ResultPath))
+func SymConvertFileToPdbPath(LocalFilePath *byte, ResultPath *byte, ResultPathSize int32) Boolean {
+	__res := bindlib.CCall3(__imp_SymConvertFileToPdbPath.Addr(), bindlib.MarshallSyscall(LocalFilePath), bindlib.MarshallSyscall(ResultPath), bindlib.MarshallSyscall(ResultPathSize))
 	return bindlib.UnmarshallSyscall[Boolean](__res)
 }
 
@@ -2552,35 +2734,39 @@ func SymCastingQueryForFiledsAndTypes(StructName *byte, FiledOfStructName *byte,
 	__res := bindlib.CCall7(__imp_SymCastingQueryForFiledsAndTypes.Addr(), bindlib.MarshallSyscall(StructName), bindlib.MarshallSyscall(FiledOfStructName), bindlib.MarshallSyscall(IsStructNamePointerOrNot), bindlib.MarshallSyscall(IsFiledOfStructNamePointerOrNot), bindlib.MarshallSyscall(NewStructOrTypeName), bindlib.MarshallSyscall(OffsetOfFieldFromTop), bindlib.MarshallSyscall(SizeOfField))
 	return bindlib.UnmarshallSyscall[Boolean](__res)
 }
-
 func (s Anon202_5) Flags() Uint64 {
 	return bindlib.ReadBitcast[Uint64](unsafe.Add(unsafe.Pointer(unsafe.SliceData(s.Raw[:])), 0))
 }
-
 func (s *Anon202_5) SetFlags(v Uint64) {
 	bindlib.WriteBitcast(unsafe.Add(unsafe.Pointer(unsafe.SliceData(s.Raw[:])), 0), v)
 }
-
 func (s Anon202_5) Fields() Anon206_9 {
 	return bindlib.ReadBitcast[Anon206_9](unsafe.Add(unsafe.Pointer(unsafe.SliceData(s.Raw[:])), 0))
 }
-
 func (s *Anon202_5) SetFields(v Anon206_9) {
 	bindlib.WriteBitcast(unsafe.Add(unsafe.Pointer(unsafe.SliceData(s.Raw[:])), 0), v)
 }
-
-func (s Anon1456_9) Fields() Anon1458_5 {
-	return bindlib.ReadBitcast[Anon1458_5](unsafe.Add(unsafe.Pointer(unsafe.SliceData(s.Raw[:])), 0))
+func (s Anon1466_9) Fields() Anon1468_5 {
+	return bindlib.ReadBitcast[Anon1468_5](unsafe.Add(unsafe.Pointer(unsafe.SliceData(s.Raw[:])), 0))
 }
-
-func (s *Anon1456_9) SetFields(v Anon1458_5) {
+func (s *Anon1466_9) SetFields(v Anon1468_5) {
 	bindlib.WriteBitcast(unsafe.Add(unsafe.Pointer(unsafe.SliceData(s.Raw[:])), 0), v)
 }
-
-func (s Anon1456_9) AsUInt() Uint32 {
+func (s Anon1466_9) AsUInt() Uint32 {
 	return bindlib.ReadBitcast[Uint32](unsafe.Add(unsafe.Pointer(unsafe.SliceData(s.Raw[:])), 0))
 }
-
-func (s *Anon1456_9) SetAsUInt(v Uint32) {
+func (s *Anon1466_9) SetAsUInt(v Uint32) {
+	bindlib.WriteBitcast(unsafe.Add(unsafe.Pointer(unsafe.SliceData(s.Raw[:])), 0), v)
+}
+func (s PortablePciDeviceHeader) ConfigSpaceEp() _PortablePciEpHeader {
+	return bindlib.ReadBitcast[_PortablePciEpHeader](unsafe.Add(unsafe.Pointer(unsafe.SliceData(s.Raw[:])), 0))
+}
+func (s *PortablePciDeviceHeader) SetConfigSpaceEp(v _PortablePciEpHeader) {
+	bindlib.WriteBitcast(unsafe.Add(unsafe.Pointer(unsafe.SliceData(s.Raw[:])), 0), v)
+}
+func (s PortablePciDeviceHeader) ConfigSpacePtpBridge() _PortablePciBridgeHeader {
+	return bindlib.ReadBitcast[_PortablePciBridgeHeader](unsafe.Add(unsafe.Pointer(unsafe.SliceData(s.Raw[:])), 0))
+}
+func (s *PortablePciDeviceHeader) SetConfigSpacePtpBridge(v _PortablePciBridgeHeader) {
 	bindlib.WriteBitcast(unsafe.Add(unsafe.Pointer(unsafe.SliceData(s.Raw[:])), 0), v)
 }

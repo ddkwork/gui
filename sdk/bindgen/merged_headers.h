@@ -316,6 +316,8 @@ typedef enum DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_ {
     DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_ON_VMX_ROOT_WRITE_REGISTER,
     DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_ON_VMX_ROOT_QUERY_PCITREE,
     DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_ON_VMX_ROOT_PERFORM_ACTIONS_ON_APIC,
+    DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_ON_VMX_ROOT_QUERY_PCIDEVINFO,
+    DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_ON_VMX_ROOT_READ_IDT_ENTRIES,
 
     //
     // Debuggee to debugger
@@ -351,6 +353,8 @@ typedef enum DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_ {
     DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_WRITE_REGISTER,
     DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_PCITREE,
     DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_APIC_REQUESTS,
+    DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_PCIDEVINFO,
+    DEBUGGER_REMOTE_PACKET_REQUESTED_ACTION_DEBUGGEE_RESULT_OF_QUERY_IDT_ENTRIES_REQUESTS,
 
     //
     // hardware debuggee to debugger
@@ -431,8 +435,8 @@ typedef struct _DEBUGGER_REMOTE_PACKET
 //////////////////////////////////////////////////
 
 #define VERSION_MAJOR 0
-#define VERSION_MINOR 11
-#define VERSION_PATCH 0
+#define VERSION_MINOR 13
+#define VERSION_PATCH 1
 
 //
 // Example of __DATE__ string: "Jul 27 2012"
@@ -977,8 +981,14 @@ const unsigned char BuildSignature[] = {
 #    define HIBYTE(w) ((BYTE)(((WORD)(w) >> 8) & 0xFF))
 #endif // !HIBYTE
 
+/**
+ * @brief Maximum number of stack buffer count in the script engine
+ */
 #define MAX_STACK_BUFFER_COUNT 256
 
+/**
+ * @brief Maximum number of variables that can be used in the script engine
+ */
 #define MAX_EXECUTION_COUNT 1000000
 
 // TODO: Extract number of variables from input of ScriptEngine
@@ -1614,7 +1624,7 @@ typedef struct _VMX_SEGMENT_SELECTOR
  * @brief error, the debugger is already in transparent-mode
  *
  */
-#define DEBUGGER_ERROR_DEBUGGER_ALREADY_UHIDE 0xc000000a
+#define DEBUGGER_ERROR_DEBUGGER_ALREADY_HIDE 0xc000000a
 
 /**
  * @brief error, invalid parameters in !e* e* commands
@@ -2068,6 +2078,12 @@ typedef struct _VMX_SEGMENT_SELECTOR
  *
  */
 #define DEBUGGER_ERROR_APIC_ACTIONS_ERROR 0xc0000053
+
+/**
+ * @brief error, debugger is already not in the transparent-mode
+ *
+ */
+#define DEBUGGER_ERROR_DEBUGGER_ALREADY_UNHIDE 0xc0000054
 
 //
 // WHEN YOU ADD ANYTHING TO THIS LIST OF ERRORS, THEN
@@ -3021,6 +3037,20 @@ typedef struct _HWDBG_SCRIPT_BUFFER
 #define IOCTL_PERFROM_ACTIONS_ON_APIC \
     CTL_CODE(FILE_DEVICE_UNKNOWN, 0x822, METHOD_BUFFERED, FILE_ANY_ACCESS)
 
+/**
+ * @brief ioctl, to query for PCI endpoint info
+ *
+ */
+#define IOCTL_PCIDEVINFO_ENUM \
+    CTL_CODE(FILE_DEVICE_UNKNOWN, 0x823, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
+/**
+ * @brief ioctl, to query the IDT entries
+ *
+ */
+#define IOCTL_QUERY_IDT_ENTRY \
+    CTL_CODE(FILE_DEVICE_UNKNOWN, 0x824, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
 
 //SDK\Headers\Pcie.h
 /**
@@ -3035,30 +3065,37 @@ typedef struct _HWDBG_SCRIPT_BUFFER
  *
  */
 #pragma once
+#pragma pack(1)
 
 //////////////////////////////////////////////////
 //		        	  Headers                   //
 //////////////////////////////////////////////////
 
 //
+// TODO
+// - Add support for domains beyond 0000
+// - Add ECAM support
+//
 // PCIe Base Specification, Rev. 4.0, Version 1.0, Table 7-59: Link Address for Link Type 1
 // Bus: 0-255 (8 bit)
 // Device: 0-31 (5 bit)
 // Function: 0-7 (3 bit)
 //
-// TODO
-// We're limited to sending fixed buffers, so we'll have to choose some reasonable numbers here instead of assuming spec-mandated maximum numbers.
-// Ensure the following parameters do not result in exceeding MaxSerialPacketSize. Consider sending multiple packets if necessary.
-//
-#define DOMAIN_MAX_NUM   2
-#define BUS_MAX_NUM      10
-#define DEVICE_MAX_NUM   2
-#define FUNCTION_MAX_NUM 1
+#define BUS_BIT_WIDTH      8
+#define DEVICE_BIT_WIDTH   5
+#define FUNCTION_BIT_WIDTH 3
 
 //
-// TODO
-// We currently limit ourselves to PCI configuration space (i.e. CAM).
+// NOTE
+// On real-world systems, the number of endpoints will likely not exceed 255.
+// If increasing DEV_MAX_NUM is necessary, ensure PCI_DEV_MINIMAL[DEV_MAX_NUM] does not result in exceeding MaxSerialPacketSize.
 //
+#define DOMAIN_MAX_NUM          0
+#define BUS_MAX_NUM             255
+#define DEVICE_MAX_NUM          32
+#define FUNCTION_MAX_NUM        8
+#define DEV_MAX_NUM             255
+#define CAM_CONFIG_SPACE_LENGTH 255
 
 /**
  * @brief PCI Common Header
@@ -3082,21 +3119,90 @@ typedef struct _PORTABLE_PCI_COMMON_HEADER
  * @brief PCI Device Header
  *
  */
-typedef struct _PORTABLE_PCI_DEVICE_HEADER
+typedef union _PORTABLE_PCI_DEVICE_HEADER
 {
-    UINT32 Bar[6];          // Base Address Registers
-    UINT32 CardBusCISPtr;   // CardBus CIS Pointer
-    UINT16 SubVendorId;     // Subsystem Vendor ID
-    UINT16 SubSystemId;     // Subsystem ID
-    UINT32 ROMBar;          // Expansion ROM Base Address
-    UINT8  CapabilitiesPtr; // Capabilities Pointer
-    UINT8  Reserved[3];
-    UINT32 Reserved1;
-    UINT8  InterruptLine; // Interrupt Line
-    UINT8  InterruptPin;  // Interrupt Pin
-    UINT8  MinGnt;        // Min_Gnt
-    UINT8  MaxLat;        // Max_Lat
+    struct _PORTABLE_PCI_EP_HEADER
+    {
+        UINT32 Bar[6];          // Base Address Registers
+        UINT32 CardBusCISPtr;   // CardBus CIS Pointer
+        UINT16 SubVendorId;     // Subsystem Vendor ID
+        UINT16 SubSystemId;     // Subsystem ID
+        UINT32 ROMBar;          // Expansion ROM Base Address
+        UINT8  CapabilitiesPtr; // Capabilities Pointer
+        UINT8  Reserved[3];
+        UINT32 Reserved1;
+        UINT8  InterruptLine; // Interrupt Line
+        UINT8  InterruptPin;  // Interrupt Pin
+        UINT8  MinGnt;        // Min_Gnt
+        UINT8  MaxLat;        // Max_Lat
+    } ConfigSpaceEp;
+
+    struct _PORTABLE_PCI_BRIDGE_HEADER
+    {
+        UINT32 Bar[2];
+        UINT8  PrimaryBusNumber;
+        UINT8  SecondaryBusNumber;
+        UINT8  SubordinateBusNumber;
+        UINT8  SecondaryLatencyTimer;
+        UINT8  IoBase;
+        UINT8  IoLimit;
+        UINT16 SecondaryStatus;
+        UINT16 MemoryBase;
+        UINT16 MemoryLimit;
+        UINT16 PrefetchableMemoryBase;
+        UINT16 PrefetchableMemoryLimit;
+        UINT32 PrefetchableBaseUpper32b;
+        UINT32 PrefetchableLimitUpper32b;
+        UINT16 IoBaseUpper16b;
+        UINT16 IoLimitUpper16b;
+        UINT8  CapabilityPtr;
+        UINT8  Reserved[3];
+        UINT32 ROMBar;
+        UINT8  InterruptLine;
+        UINT8  InterruptPin;
+        UINT16 BridgeControl;
+    } ConfigSpacePtpBridge;
+
+    // TODO: Add support for HeaderType 0x2 (PCI-to-CardBus bridge)
 } PORTABLE_PCI_DEVICE_HEADER, *PPORTABLE_PCI_DEVICE_HEADER;
+
+/**
+ * @brief PCI Configuration Space Minimal Header for !pcitree
+ *
+ */
+typedef struct _PORTABLE_PCI_CONFIG_SPACE_HEADER_MINIMAL
+{
+    //
+    // Common header
+    //
+    UINT16 VendorId;
+    UINT16 DeviceId;
+    UINT8  ClassCode[3];
+} PORTABLE_PCI_CONFIG_SPACE_HEADER_MINIMAL, *PPORTABLE_PCI_CONFIG_SPACE_HEADER_MINIMAL;
+
+/**
+ * @brief PCI Device Minimal Data Structure for !pcitree
+ *
+ */
+typedef struct _PCI_DEV_MINIMAL
+{
+    UINT8                                    Bus : BUS_BIT_WIDTH;
+    UINT8                                    Device : DEVICE_BIT_WIDTH;
+    UINT8                                    Function : FUNCTION_BIT_WIDTH;
+    PORTABLE_PCI_CONFIG_SPACE_HEADER_MINIMAL ConfigSpace;
+} PCI_DEV_MINIMAL, *PPCI_DEV_MINIMAL;
+
+/**
+ * @brief PCI Device MMIO BAR Metadata
+ *
+ */
+typedef struct _PCI_DEV_MMIOBAR_INFO
+{
+    BOOL   Is64Bit;
+    BOOL   IsEnabled;
+    UINT64 BarOffsetEnd;
+    UINT64 BarSize;
+} PCI_DEV_MMIOBAR_INFO, *PPCI_DEV_MMIOBAR_INFO;
 
 /**
  * @brief PCI Configuration Space Header
@@ -3106,54 +3212,23 @@ typedef struct _PORTABLE_PCI_CONFIG_SPACE_HEADER
 {
     PORTABLE_PCI_COMMON_HEADER CommonHeader;
     PORTABLE_PCI_DEVICE_HEADER DeviceHeader;
-    // TODO: Add Device Private, Capabilities, Enhanced Capabilities
 } PORTABLE_PCI_CONFIG_SPACE_HEADER, *PPORTABLE_PCI_CONFIG_SPACE_HEADER;
-
-/**
- * @brief PCI Function Data Structure
- *
- */
-typedef struct _PCI_FUNCTION
-{
-    UINT8 Placeholder;
-} PCI_FUNCTION, *PPCI_FUNCTION;
 
 /**
  * @brief PCI Device Data Structure
  *
  */
-typedef struct _PCI_DEVICE
+typedef struct _PCI_DEV
 {
-    PORTABLE_PCI_CONFIG_SPACE_HEADER ConfigSpace[DEVICE_MAX_NUM];
-    PCI_FUNCTION                     Function[FUNCTION_MAX_NUM];
-} PCI_DEVICE, *PPCI_DEVICE;
+    UINT8                            Bus : BUS_BIT_WIDTH;
+    UINT8                            Device : DEVICE_BIT_WIDTH;
+    UINT8                            Function : FUNCTION_BIT_WIDTH;
+    PORTABLE_PCI_CONFIG_SPACE_HEADER ConfigSpace;
+    BYTE                             ConfigSpaceAdditional[CAM_CONFIG_SPACE_LENGTH - sizeof(PORTABLE_PCI_CONFIG_SPACE_HEADER)];
+    PCI_DEV_MMIOBAR_INFO             MmioBarInfo[6];
+} PCI_DEV, *PPCI_DEV;
 
-/**
- * @brief PCI Bus Data Structure
- *
- */
-typedef struct _PCI_BUS
-{
-    PCI_DEVICE Device[DEVICE_MAX_NUM];
-} PCI_BUS, *PPCI_BUS;
-
-/**
- * @brief PCI Domain Data Structure
- *
- */
-typedef struct _PCI_DOMAIN
-{
-    PCI_BUS Bus[BUS_MAX_NUM];
-} PCI_DOMAIN, *PPCI_DOMAIN;
-
-/**
- * @brief PCI Tree Data Structure
- *
- */
-typedef struct _PCI_TREE
-{
-    PCI_DOMAIN Domain[DOMAIN_MAX_NUM];
-} PCI_TREE, *PPCI_TREE;
+#pragma pack()
 
 
 //SDK\Headers\RequestStructures.h
@@ -3709,20 +3784,19 @@ typedef struct _DEBUGGER_HIDE_AND_TRANSPARENT_DEBUGGER_MODE
 {
     BOOLEAN IsHide;
 
-    UINT64 CpuidAverage;
-    UINT64 CpuidStandardDeviation;
-    UINT64 CpuidMedian;
+    // UINT64 CpuidAverage;
+    // UINT64 CpuidStandardDeviation;
+    // UINT64 CpuidMedian;
 
-    UINT64 RdtscAverage;
-    UINT64 RdtscStandardDeviation;
-    UINT64 RdtscMedian;
+    // UINT64 RdtscAverage;
+    // UINT64 RdtscStandardDeviation;
+    // UINT64 RdtscMedian;
 
-    BOOLEAN TrueIfProcessIdAndFalseIfProcessName;
-    UINT32  ProcId;
-    UINT32  LengthOfProcessName; // in the case of !hide name xxx, this parameter
-                                 // shows the length of xxx
+    // BOOLEAN TrueIfProcessIdAndFalseIfProcessName;
+    // UINT32  ProcId;
+    // UINT32  LengthOfProcessName;
 
-    UINT64 KernelStatus; /* DEBUGGER_OPERATION_WAS_SUCCESSFUL ,
+    UINT32 KernelStatus; /* DEBUGGER_OPERATION_WAS_SUCCESSFUL ,
                           DEBUGGER_ERROR_UNABLE_TO_HIDE_OR_UNHIDE_DEBUGGER
                           */
 
@@ -4191,6 +4265,7 @@ typedef struct _DEBUGGEE_STEP_PACKET
 typedef enum DEBUGGER_APIC_REQUEST_TYPE_ {
 
     DEBUGGER_APIC_REQUEST_TYPE_READ_LOCAL_APIC,
+    DEBUGGER_APIC_REQUEST_TYPE_READ_IO_APIC,
 
 } DEBUGGER_APIC_REQUEST_TYPE;
 
@@ -4314,6 +4389,74 @@ typedef struct _LAPIC_PAGE
     UINT32 SelfIpi;           // offset 0x3F0
     UINT8  Reserved3F4[0x0C]; // valid only for X2APIC
 } LAPIC_PAGE, *PLAPIC_PAGE;
+
+/* ==============================================================================================
+ */
+
+/**
+ * @brief Maximum number of I/O APIC entries
+ * @details Usually 256 entries are enough (but we allocate 400 for systems with more
+ * I/O APIC entries)
+ * We're not gonna make the packet bigger than it's needed
+ *
+ */
+#define MAX_NUMBER_OF_IO_APIC_ENTRIES 400
+
+/**
+ * @brief The structure of I/O APIC result packet in HyperDbg
+ *
+ */
+typedef struct _IO_APIC_ENTRY_PACKETS
+{
+    UINT64 ApicBasePa;
+    UINT64 ApicBaseVa;
+    UINT32 IoIdReg;
+    UINT32 IoLl;
+    UINT32 IoArbIdReg;
+    UINT64 LlLhData[MAX_NUMBER_OF_IO_APIC_ENTRIES];
+
+} IO_APIC_ENTRY_PACKETS, *PIO_APIC_ENTRY_PACKETS;
+
+/**
+ * @brief check so the IO_APIC_ENTRY_PACKETS should be smaller than packet size
+ *
+ */
+static_assert(sizeof(IO_APIC_ENTRY_PACKETS) < PacketChunkSize,
+              "err (static_assert), size of PacketChunkSize should be bigger than IO_APIC_ENTRY_PACKETS");
+
+/* ==============================================================================================
+ */
+
+/**
+ * @brief Maximum number of IDT entries
+ *
+ */
+#define MAX_NUMBER_OF_IDT_ENTRIES 256
+
+/**
+ * @brief The structure of IDT entries result packet in HyperDbg
+ *
+ */
+typedef struct _INTERRUPT_DESCRIPTOR_TABLE_ENTRIES_PACKETS
+{
+    UINT32 KernelStatus;
+    UINT64 IdtEntry[MAX_NUMBER_OF_IDT_ENTRIES];
+
+} INTERRUPT_DESCRIPTOR_TABLE_ENTRIES_PACKETS, *PINTERRUPT_DESCRIPTOR_TABLE_ENTRIES_PACKETS;
+
+/**
+ * @brief Debugger size of INTERRUPT_DESCRIPTOR_TABLE_ENTRIES_PACKETS
+ *
+ */
+#define SIZEOF_INTERRUPT_DESCRIPTOR_TABLE_ENTRIES_PACKETS \
+    sizeof(INTERRUPT_DESCRIPTOR_TABLE_ENTRIES_PACKETS)
+
+/**
+ * @brief check so the INTERRUPT_DESCRIPTOR_TABLE_ENTRIES_PACKETS should be smaller than packet size
+ *
+ */
+static_assert(sizeof(INTERRUPT_DESCRIPTOR_TABLE_ENTRIES_PACKETS) < PacketChunkSize,
+              "err (static_assert), size of PacketChunkSize should be bigger than INTERRUPT_DESCRIPTOR_TABLE_ENTRIES_PACKETS");
 
 /* ==============================================================================================
  */
@@ -4475,15 +4618,48 @@ typedef struct _DEBUGGEE_REGISTER_WRITE_DESCRIPTION
     sizeof(DEBUGGEE_PCITREE_REQUEST_RESPONSE_PACKET)
 
 /**
- * @brief Pcitree Structure
+ * @brief Pcitree Request-Response Packet. Represents PCI device tree.
  *
  */
 typedef struct _DEBUGGEE_PCITREE_REQUEST_RESPONSE_PACKET
 {
-    UINT32   KernelStatus;
-    PCI_TREE PciTree;
+    UINT32          KernelStatus;
+    UINT8           DeviceInfoListNum;
+    PCI_DEV_MINIMAL DeviceInfoList[DEV_MAX_NUM];
 
 } DEBUGGEE_PCITREE_REQUEST_RESPONSE_PACKET, *PDEBUGGEE_PCITREE_REQUEST_RESPONSE_PACKET;
+
+/**
+ * @brief check so the DEBUGGEE_PCITREE_REQUEST_RESPONSE_PACKET should be smaller than packet size
+ *
+ */
+static_assert(sizeof(DEBUGGEE_PCITREE_REQUEST_RESPONSE_PACKET) < PacketChunkSize,
+              "err (static_assert), size of PacketChunkSize should be bigger than DEBUGGEE_PCITREE_REQUEST_RESPONSE_PACKET");
+
+/* ==============================================================================================
+ */
+
+#define SIZEOF_DEBUGGEE_PCIDEVINFO_REQUEST_RESPONSE_PACKET \
+    sizeof(DEBUGGEE_PCIDEVINFO_REQUEST_RESPONSE_PACKET)
+
+/**
+ * @brief PCI device info Request-Response Packet, used by !pcicam and future PCI-related commands. Represents a PCI device.
+ *
+ */
+typedef struct _DEBUGGEE_PCIDEVINFO_REQUEST_RESPONSE_PACKET
+{
+    UINT32  KernelStatus;
+    BOOL    PrintRaw;
+    PCI_DEV DeviceInfo;
+
+} DEBUGGEE_PCIDEVINFO_REQUEST_RESPONSE_PACKET, *PDEBUGGEE_PCIDEVINFO_REQUEST_RESPONSE_PACKET;
+
+/**
+ * @brief check so the DEBUGGEE_PCIDEVINFO_REQUEST_RESPONSE_PACKET should be smaller than packet size
+ *
+ */
+static_assert(sizeof(DEBUGGEE_PCIDEVINFO_REQUEST_RESPONSE_PACKET) < PacketChunkSize,
+              "err (static_assert), size of PacketChunkSize should be bigger than DEBUGGEE_PCIDEVINFO_REQUEST_RESPONSE_PACKET");
 
 /* ==============================================================================================
  */
@@ -4651,21 +4827,32 @@ static const char *const SymbolTypeNames[] = {
 #define FUNC_INTERLOCKED_DECREMENT 70
 #define FUNC_PHYSICAL_TO_VIRTUAL 71
 #define FUNC_VIRTUAL_TO_PHYSICAL 72
-#define FUNC_ED 73
-#define FUNC_EB 74
-#define FUNC_EQ 75
-#define FUNC_INTERLOCKED_EXCHANGE 76
-#define FUNC_INTERLOCKED_EXCHANGE_ADD 77
-#define FUNC_INTERLOCKED_COMPARE_EXCHANGE 78
-#define FUNC_STRLEN 79
-#define FUNC_STRCMP 80
-#define FUNC_MEMCMP 81
-#define FUNC_STRNCMP 82
-#define FUNC_WCSLEN 83
-#define FUNC_WCSCMP 84
-#define FUNC_EVENT_INJECT_ERROR_CODE 85
-#define FUNC_MEMCPY 86
-#define FUNC_WCSNCMP 87
+#define FUNC_POI_PA 73
+#define FUNC_HI_PA 74
+#define FUNC_LOW_PA 75
+#define FUNC_DB_PA 76
+#define FUNC_DD_PA 77
+#define FUNC_DW_PA 78
+#define FUNC_DQ_PA 79
+#define FUNC_ED 80
+#define FUNC_EB 81
+#define FUNC_EQ 82
+#define FUNC_INTERLOCKED_EXCHANGE 83
+#define FUNC_INTERLOCKED_EXCHANGE_ADD 84
+#define FUNC_EB_PA 85
+#define FUNC_ED_PA 86
+#define FUNC_EQ_PA 87
+#define FUNC_INTERLOCKED_COMPARE_EXCHANGE 88
+#define FUNC_STRLEN 89
+#define FUNC_STRCMP 90
+#define FUNC_MEMCMP 91
+#define FUNC_STRNCMP 92
+#define FUNC_WCSLEN 93
+#define FUNC_WCSCMP 94
+#define FUNC_EVENT_INJECT_ERROR_CODE 95
+#define FUNC_MEMCPY 96
+#define FUNC_MEMCPY_PA 97
+#define FUNC_WCSNCMP 98
 
 static const char *const FunctionNames[] = {
 "FUNC_UNDEFINED",
@@ -4741,11 +4928,21 @@ static const char *const FunctionNames[] = {
 "FUNC_INTERLOCKED_DECREMENT",
 "FUNC_PHYSICAL_TO_VIRTUAL",
 "FUNC_VIRTUAL_TO_PHYSICAL",
+"FUNC_POI_PA",
+"FUNC_HI_PA",
+"FUNC_LOW_PA",
+"FUNC_DB_PA",
+"FUNC_DD_PA",
+"FUNC_DW_PA",
+"FUNC_DQ_PA",
 "FUNC_ED",
 "FUNC_EB",
 "FUNC_EQ",
 "FUNC_INTERLOCKED_EXCHANGE",
 "FUNC_INTERLOCKED_EXCHANGE_ADD",
+"FUNC_EB_PA",
+"FUNC_ED_PA",
+"FUNC_EQ_PA",
 "FUNC_INTERLOCKED_COMPARE_EXCHANGE",
 "FUNC_STRLEN",
 "FUNC_STRCMP",
@@ -4755,6 +4952,7 @@ static const char *const FunctionNames[] = {
 "FUNC_WCSCMP",
 "FUNC_EVENT_INJECT_ERROR_CODE",
 "FUNC_MEMCPY",
+"FUNC_MEMCPY_PA",
 "FUNC_WCSNCMP",
 };
 
@@ -5256,10 +5454,30 @@ hyperdbg_u_start_process_with_args(const WCHAR * path, const WCHAR * arguments);
 
 //
 // APIC related command
-// Exported functionality of the '!apic' command
+// Exported functionality of the '!apic', and '!ioapic' commands
 //
 IMPORT_EXPORT_LIBHYPERDBG BOOLEAN
-hyperdbg_u_command_get_local_apic(PLAPIC_PAGE local_apic, BOOLEAN * is_using_x2apic);
+hyperdbg_u_get_local_apic(PLAPIC_PAGE local_apic, BOOLEAN * is_using_x2apic);
+
+IMPORT_EXPORT_LIBHYPERDBG BOOLEAN
+hyperdbg_u_get_io_apic(IO_APIC_ENTRY_PACKETS * io_apic);
+
+//
+// IDT related command
+// Exported functionality of the '!idt' command
+//
+IMPORT_EXPORT_LIBHYPERDBG BOOLEAN
+hyperdbg_u_get_idt_entry(INTERRUPT_DESCRIPTOR_TABLE_ENTRIES_PACKETS * idt_packet);
+
+//
+// Transparent mode related command
+// Exported functionality of the '!hide', and '!unhide' commands
+//
+IMPORT_EXPORT_LIBHYPERDBG BOOLEAN
+hyperdbg_u_enable_transparent_mode();
+
+IMPORT_EXPORT_LIBHYPERDBG BOOLEAN
+hyperdbg_u_disable_transparent_mode();
 
 //
 // Assembler
@@ -5390,7 +5608,7 @@ IMPORT_EXPORT_HYPERDBG_SCRIPT_ENGINE BOOLEAN
 ScriptEngineCreateSymbolTableForDisassembler(void * CallbackFunction);
 
 IMPORT_EXPORT_HYPERDBG_SCRIPT_ENGINE BOOLEAN
-ScriptEngineConvertFileToPdbPath(const char * LocalFilePath, char * ResultPath);
+ScriptEngineConvertFileToPdbPath(const char * LocalFilePath, char * ResultPath, size_t ResultPathSize);
 
 IMPORT_EXPORT_HYPERDBG_SCRIPT_ENGINE BOOLEAN
 ScriptEngineConvertFileToPdbFileAndGuidAndAgeDetails(const char * LocalFilePath, char * PdbFilePath, char * GuidAndAgeDetails, BOOLEAN Is32BitModule);
@@ -5470,7 +5688,7 @@ IMPORT_EXPORT_HYPERDBG_SYMBOL_PARSER BOOLEAN
 SymCreateSymbolTableForDisassembler(void * CallbackFunction);
 
 IMPORT_EXPORT_HYPERDBG_SYMBOL_PARSER BOOLEAN
-SymConvertFileToPdbPath(const char * LocalFilePath, char * ResultPath);
+SymConvertFileToPdbPath(const char * LocalFilePath, char * ResultPath, size_t ResultPathSize);
 
 IMPORT_EXPORT_HYPERDBG_SYMBOL_PARSER BOOLEAN
 SymConvertFileToPdbFileAndGuidAndAgeDetails(const char * LocalFilePath,

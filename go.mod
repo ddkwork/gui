@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/ddkwork/app v0.0.0-20250328204027-efbf7c5e1f10
-	github.com/ddkwork/golibrary v0.0.91-0.20250324091236-7773f1c26781
+	github.com/ddkwork/golibrary v0.1.1
 	github.com/ddkwork/unison v0.0.0-20250324092417-167fd55775cc
 	github.com/ebitengine/purego v0.9.0-alpha.2.0.20250319192307-d99d2bef7bd5
 	github.com/saferwall/pe v1.5.6
@@ -39,7 +39,7 @@ require (
 	github.com/spyre-project/spyre v1.2.5 // indirect
 	github.com/valyala/fastjson v1.6.4 // indirect
 	github.com/yuin/goldmark v1.7.8 // indirect
-	golang.org/x/arch v0.12.0 // indirect
+	golang.org/x/arch v0.15.1-0.20250320222310-f2e9665ba356 // indirect
 	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 // indirect
 	golang.org/x/mod v0.24.0 // indirect
 	golang.org/x/sync v0.12.0 // indirect

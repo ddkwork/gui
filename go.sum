@@ -21,8 +21,8 @@ github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8Yc
 github.com/daviddengcn/go-colortext v1.0.0/go.mod h1:zDqEI5NVUop5QPpVJUxE9UO10hRnmkD5G4Pmri9+m4c=
 github.com/ddkwork/app v0.0.0-20250328204027-efbf7c5e1f10 h1:eFvjRqaEFE4XuIMer3ki+jZbmjXdCe3DIXh9+RjH9C8=
 github.com/ddkwork/app v0.0.0-20250328204027-efbf7c5e1f10/go.mod h1:it9aM7f7a3LHCOLhElG6EBIiDAmKUdSmtvMLKIgVqao=
-github.com/ddkwork/golibrary v0.0.91-0.20250324091236-7773f1c26781 h1:UAInGeDRB13O+j7rnrhCGs1WEZTcUkunvtd0rRhPM+k=
-github.com/ddkwork/golibrary v0.0.91-0.20250324091236-7773f1c26781/go.mod h1:asHnV6kPJrWJ5J2QeDZnQawJ1iroGQVifvC8+UoMaXA=
+github.com/ddkwork/golibrary v0.1.1 h1:Rm8TIiBFwxs16tnAhjlJBRFlrLjhNIBdruQryAfjEzk=
+github.com/ddkwork/golibrary v0.1.1/go.mod h1:asHnV6kPJrWJ5J2QeDZnQawJ1iroGQVifvC8+UoMaXA=
 github.com/ddkwork/toolbox v0.0.0-20250320161820-8c695d9534c1 h1:gMVKk3IpNUrLYx816nsjLbs2W7l/SyLTIlWirLO1SIc=
 github.com/ddkwork/toolbox v0.0.0-20250320161820-8c695d9534c1/go.mod h1:hpmwU13lf7KVgYFZhxkiEucI0s7AM1mD6hpWn/5u/mc=
 github.com/ddkwork/unison v0.0.0-20250324092417-167fd55775cc h1:bXzW8us0R7EliDPgE8Q014OHBgpSXsjPnqhAz9+ILTU=
@@ -109,8 +109,8 @@ github.com/winlabs/gowin32 v0.0.0-20240930213947-f504d7e14639/go.mod h1:N51TYkG9
 github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
 github.com/yuin/goldmark v1.7.8 h1:iERMLn0/QJeHFhxSt3p6PeN9mGnvIKSpG9YYorDMnic=
 github.com/yuin/goldmark v1.7.8/go.mod h1:uzxRWxtg69N339t3louHJ7+O03ezfj6PlliRlaOzY1E=
-golang.org/x/arch v0.12.0 h1:UsYJhbzPYGsT0HbEdmYcqtCv8UNGvnaL561NnIUvaKg=
-golang.org/x/arch v0.12.0/go.mod h1:FEVrYAQjsQXMVJ1nsMoVVXPZg6p2JE2mx8psSWTDQys=
+golang.org/x/arch v0.15.1-0.20250320222310-f2e9665ba356 h1:9W5OT4FLEF5u9dDLOeX8wn9BP8OQMT6AQw+IocnaUEM=
+golang.org/x/arch v0.15.1-0.20250320222310-f2e9665ba356/go.mod h1:JmwW7aLIoRUKgaTzhkiEFxvcEiQGyOg9BMonBJUS7EE=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20190820162420-60c769a6c586/go.mod h1:yigFU9vqHzYiE8UmvKecakEJjdnWj3jj499lnFckfCI=
 golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97/go.mod h1:GvvjBRRGRdwPK5ydBHafDWAxML/pGHZbMvKqRZ5+Abc=

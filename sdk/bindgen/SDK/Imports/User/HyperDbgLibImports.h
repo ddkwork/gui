@@ -234,10 +234,30 @@ hyperdbg_u_start_process_with_args(const WCHAR * path, const WCHAR * arguments);
 
 //
 // APIC related command
-// Exported functionality of the '!apic' command
+// Exported functionality of the '!apic', and '!ioapic' commands
 //
 IMPORT_EXPORT_LIBHYPERDBG BOOLEAN
-hyperdbg_u_command_get_local_apic(PLAPIC_PAGE local_apic, BOOLEAN * is_using_x2apic);
+hyperdbg_u_get_local_apic(PLAPIC_PAGE local_apic, BOOLEAN * is_using_x2apic);
+
+IMPORT_EXPORT_LIBHYPERDBG BOOLEAN
+hyperdbg_u_get_io_apic(IO_APIC_ENTRY_PACKETS * io_apic);
+
+//
+// IDT related command
+// Exported functionality of the '!idt' command
+//
+IMPORT_EXPORT_LIBHYPERDBG BOOLEAN
+hyperdbg_u_get_idt_entry(INTERRUPT_DESCRIPTOR_TABLE_ENTRIES_PACKETS * idt_packet);
+
+//
+// Transparent mode related command
+// Exported functionality of the '!hide', and '!unhide' commands
+//
+IMPORT_EXPORT_LIBHYPERDBG BOOLEAN
+hyperdbg_u_enable_transparent_mode();
+
+IMPORT_EXPORT_LIBHYPERDBG BOOLEAN
+hyperdbg_u_disable_transparent_mode();
 
 //
 // Assembler

@@ -302,3 +302,17 @@
  */
 #define IOCTL_PERFROM_ACTIONS_ON_APIC \
     CTL_CODE(FILE_DEVICE_UNKNOWN, 0x822, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
+/**
+ * @brief ioctl, to query for PCI endpoint info
+ *
+ */
+#define IOCTL_PCIDEVINFO_ENUM \
+    CTL_CODE(FILE_DEVICE_UNKNOWN, 0x823, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
+/**
+ * @brief ioctl, to query the IDT entries
+ *
+ */
+#define IOCTL_QUERY_IDT_ENTRY \
+    CTL_CODE(FILE_DEVICE_UNKNOWN, 0x824, METHOD_BUFFERED, FILE_ANY_ACCESS)
